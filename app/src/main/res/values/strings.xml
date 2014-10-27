@@ -4,5 +4,6 @@
     <string name="app_name">Donde esta el pequeno Nicolas</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_find_nicolas">FindNicolas</string>
 
 </resources>

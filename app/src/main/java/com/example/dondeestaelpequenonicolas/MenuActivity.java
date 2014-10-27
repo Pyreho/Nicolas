@@ -1,6 +1,7 @@
 package com.example.dondeestaelpequenonicolas;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -35,6 +36,8 @@ public class MenuActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
     public void startFirstRound(View view){
+        Intent intent=new Intent(this,FindNicolas.class);
+        startActivity(intent);
 
     }
     public void launchSettings(View view){
