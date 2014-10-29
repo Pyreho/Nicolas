@@ -9,6 +9,7 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import com.example.dondeestaelpequenonicolas.R;
+import com.example.dondeestaelpequenonicolas.TouchImageView;
 
 public class FindNicolas extends Activity {
 
@@ -16,7 +17,7 @@ public class FindNicolas extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_nicolas);
-        TouchImageView img =(TouchImageView)findViewById(R.id.img);
+        final TouchImageView img =(TouchImageView)findViewById(R.id.img);
         int imID= getResources().getIdentifier("quincem2","drawable",getPackageName());
         img.setImageResource(imID);
         long originalWidth = img.getDrawable().getIntrinsicWidth();
@@ -34,10 +35,17 @@ public class FindNicolas extends Activity {
                 float coordY= motionEvent.getY();
                 float originX=view.getLeft();
                 float originY=view.getRight();
+                
+                float left = img.getZoomedRect().left * img.getWidth();
+                float top = img.getZoomedRect().top * img.getHeight();
+                
                 Log.d("Value of X",String.valueOf(coordX));
                 Log.d("Value of Y",String.valueOf(coordY));
-                Log.d("OriginX", String.valueOf(originX));
-                Log.d("OriginY", String.valueOf(originY));
+                Log.d("Left", String.valueOf(left));
+                Log.d("Top", String.valueOf(top));
+                Log.d("Absolute X", String.valueOf(coordX/img.getCurrentZoom() + left));//Coordenadas absolutas incluso haciendo zoom
+                Log.d("Absolute Y", String.valueOf(coordY/img.getCurrentZoom() + top));
+                Log.d("Zoom", String.valueOf(img.getCurrentZoom()));
                 return true;
             }
         });
