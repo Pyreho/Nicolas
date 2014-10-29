@@ -1,6 +1,7 @@
 package com.example.dondeestaelpequenonicolas;
 
 import android.app.Activity;
+import android.graphics.Matrix;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -20,8 +21,8 @@ public class FindNicolas extends Activity {
         final TouchImageView img =(TouchImageView)findViewById(R.id.img);
         int imID= getResources().getIdentifier("quincem2","drawable",getPackageName());
         img.setImageResource(imID);
-        long originalWidth = img.getDrawable().getIntrinsicWidth();
-        long originalHeight = img.getDrawable().getIntrinsicHeight();
+        final long originalWidth = img.getDrawable().getIntrinsicWidth();
+        final long originalHeight = img.getDrawable().getIntrinsicHeight();
 
 
 
@@ -31,21 +32,41 @@ public class FindNicolas extends Activity {
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 float displayedWidth = view.getMeasuredWidth();
                 float displayedHeight = view.getMeasuredHeight();
-                float coordX=motionEvent.getX();
-                float coordY= motionEvent.getY();
-                float originX=view.getLeft();
-                float originY=view.getRight();
-                
+                float coordX = motionEvent.getX();
+                float coordY = motionEvent.getY();
+                float originX = view.getLeft();
+                float originY = view.getTop();
+
                 float left = img.getZoomedRect().left * img.getWidth();
                 float top = img.getZoomedRect().top * img.getHeight();
-                
-                Log.d("Value of X",String.valueOf(coordX));
-                Log.d("Value of Y",String.valueOf(coordY));
-                Log.d("Left", String.valueOf(left));
-                Log.d("Top", String.valueOf(top));
-                Log.d("Absolute X", String.valueOf(coordX/img.getCurrentZoom() + left));//Coordenadas absolutas incluso haciendo zoom
-                Log.d("Absolute Y", String.valueOf(coordY/img.getCurrentZoom() + top));
-                Log.d("Zoom", String.valueOf(img.getCurrentZoom()));
+                float[] m=new float[9];
+                Matrix matrix = img.getImageMatrix();
+                matrix.getValues(m);
+                Log.d("matrix", String.valueOf(matrix));
+                Log.d("Array m",String.valueOf(m));
+                float origW = originalWidth;
+                float origH = originalHeight;
+                float transX = m[Matrix.MTRANS_X];
+                float transY = m[Matrix.MTRANS_Y];
+                //float finalX = ((coordX - transX) * origW) / getImageWidth();
+                //float finalY = ((coordY - transY) * origH) / getImageHeight();
+                float finalX = (coordX - transX)/img.getCurrentZoom();
+                float finalY=(coordY - transY)/img.getCurrentZoom();
+                float finalXAdrian= coordX / img.getCurrentZoom() + left;
+                float finalYAdrian=coordY / img.getCurrentZoom() + top;
+                Log.d("Value of X", String.valueOf(coordX));
+                Log.d("Value of Y", String.valueOf(coordY));
+                //Log.d("Left", String.valueOf(left));
+                //Log.d("Top", String.valueOf(top));
+                //Log.d("viewTop", String.valueOf(originY));
+                //Log.d("RelativeY", String.valueOf(coordY / img.getCurrentZoom()));
+                Log.d("Absolute X", String.valueOf(coordX / img.getCurrentZoom() + left));//Coordenadas absolutas incluso haciendo zoom
+                Log.d("Absolute Y", String.valueOf((coordY ) / img.getCurrentZoom()+ top));
+                Log.d("Absolute X2",String.valueOf(finalX));
+                Log.d("Absolute Y2",String.valueOf(finalY));
+                Log.d("RelX", String.valueOf(finalX/finalXAdrian));
+                Log.d("RelY", String.valueOf(finalY/finalYAdrian));
+                //Log.d("Zoom", String.valueOf(img.getCurrentZoom()));
                 return true;
             }
         });
