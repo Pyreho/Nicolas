@@ -1,6 +1,7 @@
 package com.example.dondeestaelpequenonicolas;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -26,17 +27,31 @@ import java.util.Arrays;
 public class FindNicolas extends Activity {
     //TODO This should be taken from the json
     private float nicoX;
-    private float originalNicoX=612;
     private float nicoY;
+    private float radius;
+/*    private float originalNicoX=612;
+
     private float originalNicoY=398;
     private float originalRadius=25;
-    private float radius;
+*/
+    private float originalNicoX;
+    private float originalNicoY;
+    private float originalRadius;
+    private String name;
+    private String comment;
+    private Image[] images;
+    private int level;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Intent intent=getIntent();
+        images=((Images)intent.getSerializableExtra("images")).getImages();
+        level=intent.getIntExtra("level",0);
+        setAttributes(images[level]);
+
         setContentView(R.layout.activity_find_nicolas);
         final TouchImageView img =(TouchImageView)findViewById(R.id.img);
-        int imID= getResources().getIdentifier("quincem2","drawable",getPackageName());
+        int imID= getResources().getIdentifier(name,"drawable",getPackageName());
         img.setImageResource(imID);
         Drawable nicoDrawable=getResources().getDrawable(imID);
         //Resource Bitmaps are immutable
@@ -176,5 +191,12 @@ public class FindNicolas extends Activity {
         float finalY=(relativeCoordinates[1]*img.getCurrentZoom() + transY);
         return new float[]{finalX, finalY };
 
+    }
+    private void setAttributes(Image image){
+        originalNicoX=image.getOriginalNicoX();
+        originalNicoY=image.getOriginalNicoY();
+        originalRadius=image.getOriginalRadius();
+        comment=image.getComment();
+        name=image.getName();
     }
 }

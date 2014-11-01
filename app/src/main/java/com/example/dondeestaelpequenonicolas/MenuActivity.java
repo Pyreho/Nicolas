@@ -3,17 +3,21 @@ package com.example.dondeestaelpequenonicolas;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
 
 public class MenuActivity extends Activity {
-
+    private Images images;
+    private int level;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
+        JSONQuestionProvider jsonQuestionProvider=new JSONQuestionProvider(this);
+        images=new Images(jsonQuestionProvider.getImages());
     }
 
 
@@ -37,6 +41,8 @@ public class MenuActivity extends Activity {
     }
     public void startFirstRound(View view){
         Intent intent=new Intent(this,FindNicolas.class);
+        intent.putExtra("images",this.images);
+        intent.putExtra("level",0);
         startActivity(intent);
 
     }
