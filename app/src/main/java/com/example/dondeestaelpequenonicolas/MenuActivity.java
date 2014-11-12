@@ -1,12 +1,18 @@
 package com.example.dondeestaelpequenonicolas;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 
 public class MenuActivity extends Activity {
@@ -18,6 +24,9 @@ public class MenuActivity extends Activity {
         setContentView(R.layout.activity_menu);
         JSONQuestionProvider jsonQuestionProvider=new JSONQuestionProvider(this);
         images=new Images(jsonQuestionProvider.getImages());
+        SharedPreferences settings = getSharedPreferences("UserInfo", 0);
+        level=settings.getInt("level",0);
+
     }
 
 
@@ -46,7 +55,30 @@ public class MenuActivity extends Activity {
         startActivity(intent);
 
     }
-    public void launchSettings(View view){
+    public void eraseInformation(View view){
+
+        AlertDialog.Builder builder =new AlertDialog.Builder(this);
+        builder.setMessage("¿Quieres Reiniciar la Partida?");
+        builder.setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id){
+                eraseInformation();
+            }
+
+        });
+        builder.setNegativeButton("No",new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id){
+
+            }});
+        AlertDialog dialog=builder.create();
+        dialog.show();
+
+            }
+    public void eraseInformation(){
+        SharedPreferences settings=getSharedPreferences("UserInfo",0);
+        SharedPreferences.Editor editor=settings.edit();
+        editor.putInt("level",0);
+        editor.commit();
 
     }
+
 }
