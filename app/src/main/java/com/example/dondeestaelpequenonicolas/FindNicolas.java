@@ -63,54 +63,48 @@ public class FindNicolas extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        absoluteCoordinates=new float[2];
-        relativeCoordinates=new float[2];
-        Intent intent=getIntent();
-        images=((Images)intent.getSerializableExtra("images")).getImages();
-        level=intent.getIntExtra("level",0);
+        absoluteCoordinates = new float[2];
+        relativeCoordinates = new float[2];
+        Intent intent = getIntent();
+        images = ((Images) intent.getSerializableExtra("images")).getImages();
+        level = intent.getIntExtra("level",0);
 
         setAttributes(images[level]);
 
         setContentView(R.layout.activity_find_nicolas);
         final TouchImageView img =(TouchImageView)findViewById(R.id.img);
-        int imID= getResources().getIdentifier(name,"drawable",getPackageName());
+        int imID = getResources().getIdentifier(name,"drawable",getPackageName());
         img.setImageResource(imID);
         Drawable nicoDrawable=getResources().getDrawable(imID);
         //Resource Bitmaps are immutable
-        Bitmap nicoBitMapOriginal=((BitmapDrawable)nicoDrawable).getBitmap();
-        final Bitmap nicoBitMap=nicoBitMapOriginal.copy(nicoBitMapOriginal.getConfig(),true);
+        Bitmap nicoBitMapOriginal = ((BitmapDrawable) nicoDrawable).getBitmap();
+        final Bitmap nicoBitMap = nicoBitMapOriginal.copy(nicoBitMapOriginal.getConfig(),true);
         originalWidth = img.getDrawable().getIntrinsicWidth();
         originalHeight = img.getDrawable().getIntrinsicHeight();
-        originalRatio=originalHeight/originalWidth;
-        Paint paint =new Paint();
+        originalRatio = originalHeight/originalWidth;
+        Paint paint = new Paint();
         paint.setStrokeWidth(1);
         paint.setStrokeCap(Paint.Cap.BUTT);
         paint.setStyle(Paint.Style.STROKE);
         paint.setColor(Color.RED);
-        Canvas canvas=new Canvas(nicoBitMap);
+        Canvas canvas = new Canvas(nicoBitMap);
         canvas.drawCircle(originalNicoX,originalNicoY,originalRadius,paint);
 
         /*
         final long originalHeight = img.getDrawable().getIntrinsicHeight();
 */
 
-
-
         img.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 //Here we hide the ads when zooming
-                Fragment fragment=getFragmentManager().findFragmentById(R.id.adFragment);
-                if(img.getCurrentZoom()!=1){
-
-                    if( fragment.isVisible())
-                    {
-                    FragmentTransaction fragmentTransaction=getFragmentManager().beginTransaction();
-                    fragmentTransaction.hide(fragment);
-                    fragmentTransaction.commit();
+                final Fragment fragment = getFragmentManager().findFragmentById(R.id.adFragment);
+                if(img.getCurrentZoom() != 1){
+                    if (fragment.isVisible()) {
+                        final FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                        fragmentTransaction.hide(fragment);
+                        fragmentTransaction.commit();
                     }
-
-
                 }
                 /*else{
                     if(fragment.isHidden()){
@@ -121,31 +115,31 @@ public class FindNicolas extends Activity {
 
                 }*/
 
-                phoneWidth=img.getWidth();
-                phoneHeight=img.getHeight();
-                phoneRatio=phoneHeight/phoneWidth;
+                phoneWidth = img.getWidth();
+                phoneHeight = img.getHeight();
+                phoneRatio = phoneHeight/phoneWidth;
                 //Log.d("measureWidth",Float.toString(measureWidth));
                 Log.d("phoneWidth",Float.toString(phoneWidth));
                 //the Image fits in the x Axis
-                if(phoneRatio>=originalRatio){
-                factor=phoneWidth/originalWidth;}
-                else{
+                if (phoneRatio >= originalRatio) {
+                    factor=phoneWidth/originalWidth;
+                } else {
                     factor=phoneHeight/originalHeight;
                 }
-                nicoX=factor*originalNicoX;
-                nicoY=factor*originalNicoY;
-                radius=factor*originalRadius;
-                WindowManager windowManager=(WindowManager)getSystemService(WINDOW_SERVICE);
-                Display display=windowManager.getDefaultDisplay();
+                nicoX = factor * originalNicoX;
+                nicoY = factor * originalNicoY;
+                radius = factor * originalRadius;
+                WindowManager windowManager = (WindowManager) getSystemService(WINDOW_SERVICE);
+                Display display = windowManager.getDefaultDisplay();
                 //int rotation=display.getRotation();
 
 
-                absoluteCoordinates=new float[] {motionEvent.getX(),motionEvent.getY()};
-                relativeCoordinates=eventToRelative(absoluteCoordinates,img);
+                absoluteCoordinates = new float[] {motionEvent.getX(),motionEvent.getY()};
+                relativeCoordinates = eventToRelative(absoluteCoordinates,img);
                 Log.d("AbsoluteCoordinates",Arrays.toString(absoluteCoordinates));
                 Log.d("RelativeCoordinates", Arrays.toString(relativeCoordinates));
                 //Log.d("NewAbsoluteCoordinates",Arrays.toString(relativeToEvent(relativeCoordinates, img)));
-                if(distance(relativeCoordinates)){
+                if (distance(relativeCoordinates)) {
                     Log.d("ConditionsSatisfied","idem");
                     //TODO
                     img.setImageBitmap(nicoBitMap);
@@ -203,6 +197,28 @@ public class FindNicolas extends Activity {
         });
     }
 
+//    @Override
+//    public void onConfigurationChanged(Configuration newConfig) {
+//        super.onConfigurationChanged(newConfig);
+//
+//        // Checks the orientation of the screen
+//        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+//            final Fragment fragment = getFragmentManager().findFragmentById(R.id.adFragment);
+//            if (fragment.isVisible()) {
+//                final FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+//                fragmentTransaction.hide(fragment);
+//                fragmentTransaction.commit();
+//            }
+//        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
+//            final Fragment fragment = getFragmentManager().findFragmentById(R.id.adFragment);
+//            if(img.getCurrentZoom() == 1 && fragment.isHidden()){
+//                FragmentTransaction fragmentTransaction=getFragmentManager().beginTransaction();
+//                fragmentTransaction.show(fragment);
+//                fragmentTransaction.commit();
+//            }
+//        }
+//    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -230,36 +246,38 @@ public class FindNicolas extends Activity {
         return (relCoord[0]-nicoX)*(relCoord[0]-nicoX)+(relCoord[1]-nicoY)*(relCoord[1]-nicoY)<radius*radius;
     }
     private float[] eventToRelative(float[] absoluteCoordinates, TouchImageView img){
-        float[] m=new float[9];
+        float[] m = new float[9];
         Matrix matrix = img.getImageMatrix();
         matrix.getValues(m);
         float transX = m[Matrix.MTRANS_X];
         float transY = m[Matrix.MTRANS_Y];
         float finalX = (absoluteCoordinates[0] - transX)/img.getCurrentZoom();
-        float finalY=(absoluteCoordinates[1] - transY)/img.getCurrentZoom();
+        float finalY = (absoluteCoordinates[1] - transY)/img.getCurrentZoom();
         return new float[]{finalX, finalY};
 
     }
     // To be used with Nicolas
     private float[] relativeToEvent(float[] relativeCoordinates, TouchImageView img){
-        float[] m=new float[9];
+        float[] m = new float[9];
         Matrix matrix = img.getImageMatrix();
         matrix.getValues(m);
 
         float transX = m[Matrix.MTRANS_X];
         float transY = m[Matrix.MTRANS_Y];
         float finalX = (relativeCoordinates[0]*img.getCurrentZoom() + transX);
-        float finalY=(relativeCoordinates[1]*img.getCurrentZoom() + transY);
-        return new float[]{finalX, finalY };
+        float finalY = (relativeCoordinates[1]*img.getCurrentZoom() + transY);
+        return new float[]{finalX, finalY};
 
     }
     private void setAttributes(Image image){
-        originalNicoX=image.getOriginalNicoX();
-        originalNicoY=image.getOriginalNicoY();
-        originalRadius=image.getOriginalRadius();
-        comment=image.getComment();
-        name=image.getName();
+        originalNicoX = image.getOriginalNicoX();
+        originalNicoY = image.getOriginalNicoY();
+        originalRadius = image.getOriginalRadius();
+        comment = image.getComment();
+        name = image.getName();
     }
+
+
     public static class AdFragment extends Fragment {
 
         private AdView mAdView;
