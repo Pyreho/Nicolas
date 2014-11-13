@@ -3,13 +3,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingRight="0dp"
+    android:id="@+id/parentNicolas"
     tools:context="com.example.dondeestaelpequenonicolas.FindNicolas">
 
     <com.example.dondeestaelpequenonicolas.TouchImageView
         android:id="@+id/img"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:visibility="invisible"
         />
+
     <!-- android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
@@ -19,10 +22,10 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/adFragment" />
 -->
-    <fragment
+    <!--<fragment
         android:id="@+id/adFragment"
         android:name="com.example.dondeestaelpequenonicolas.FindNicolas$AdFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true" />
+        android:layout_alignParentBottom="true" />-->
  </RelativeLayout>

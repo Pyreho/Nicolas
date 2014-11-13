@@ -3,7 +3,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
-</RelativeLayout>-->
+</RelativeLayout>
+android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+-->
 <!--Not used-->
 
    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -11,14 +14,62 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".MyActivity$PlaceholderFragment">
 
-    <TextView
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".MyActivity$PlaceholderFragment"
+    >
+    <fragment
+        android:id="@+id/adFragment"
+        android:name="com.example.dondeestaelpequenonicolas.FindNicolas$AdFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        />
+
+    <RelativeLayout
+        android:id="@+id/play_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:layout_above="@id/adFragment"
+        >
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Jugar"
+            android:id="@+id/start_round_button"
+            android:layout_centerHorizontal="true"
+            android:onClick="startRound"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/play_button"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/Level"
+        android:text="Nivel 2"
+        android:gravity="center"
+        android:textSize="25pt"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:id="@+id/LevelDescription"
+        android:textSize="15pt"
+        android:text="Nuestro súper agente secreto infiltrado para defender la unidad de España"/>
+
+    </LinearLayout>
+
+
 
 </RelativeLayout>

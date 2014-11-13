@@ -2,7 +2,9 @@ package com.example.dondeestaelpequenonicolas;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
@@ -24,6 +26,7 @@ import android.view.Surface;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.TextView;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -67,12 +70,17 @@ public class FindNicolas extends Activity {
         relativeCoordinates = new float[2];
         Intent intent = getIntent();
         images = ((Images) intent.getSerializableExtra("images")).getImages();
-        level = intent.getIntExtra("level",0);
+        level = intent.getIntExtra("level", 0);
 
         setAttributes(images[level]);
-
         setContentView(R.layout.activity_find_nicolas);
-        final TouchImageView img =(TouchImageView)findViewById(R.id.img);
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        PlaceholderFragment placeholderFragment = new PlaceholderFragment();
+        fragmentTransaction.add(R.id.parentNicolas, placeholderFragment, "StartLevel");
+        fragmentTransaction.commit();
+        final TouchImageView img =(TouchImageView)this.findViewById(R.id.img);
+
         int imID = getResources().getIdentifier(name,"drawable",getPackageName());
         img.setImageResource(imID);
         Drawable nicoDrawable=getResources().getDrawable(imID);
@@ -98,14 +106,14 @@ public class FindNicolas extends Activity {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 //Here we hide the ads when zooming
-                final Fragment fragment = getFragmentManager().findFragmentById(R.id.adFragment);
+                /*final Fragment fragment = getFragmentManager().findFragmentById(R.id.adFragment);
                 if(img.getCurrentZoom() != 1){
                     if (fragment.isVisible()) {
                         final FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
                         fragmentTransaction.hide(fragment);
                         fragmentTransaction.commit();
                     }
-                }
+                }*/
                 /*else{
                     if(fragment.isHidden()){
                         FragmentTransaction fragmentTransaction=getFragmentManager().beginTransaction();
@@ -195,6 +203,20 @@ public class FindNicolas extends Activity {
 
             }
         });
+    }
+    public void startRound(View view){
+        FragmentManager fragmentManager = getFragmentManager();
+
+        Fragment fragment = fragmentManager.findFragmentByTag("StartLevel");
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.remove(fragment);
+        fragmentTransaction.commit();
+
+        final TouchImageView img =(TouchImageView)this.findViewById(R.id.img);
+        img.setVisibility(View.VISIBLE);
+
+
+
     }
 
 //    @Override
@@ -339,7 +361,7 @@ public class FindNicolas extends Activity {
 
     }
 
-    /*public static class PlaceholderFragment extends Fragment {
+    public static class PlaceholderFragment extends Fragment {
 
         public PlaceholderFragment() {
         }
@@ -350,5 +372,9 @@ public class FindNicolas extends Activity {
             View rootView = inflater.inflate(R.layout.fragment_my, container, false);
             return rootView;
         }
-    }*/
+        public void setLevelDescription(String levelDescription){
+
+        }
+    }
+
 }
