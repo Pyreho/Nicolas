@@ -49,11 +49,17 @@ public class MenuActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
     public void startFirstRound(View view){
-        Intent intent=new Intent(this,FindNicolas.class);
-        intent.putExtra("images",this.images);
-        intent.putExtra("level",0);
-        startActivity(intent);
-
+        /*Log.d("level",Integer.toString(level));
+        if(level==images.getImages().length){
+        View levelsCompletedView=this.findViewById(R.id.LevelsCompleted);
+        levelsCompletedView.setVisibility(View.VISIBLE);
+        }
+        else {*/
+            Intent intent = new Intent(this, FindNicolas.class);
+            intent.putExtra("images", this.images);
+            //intent.putExtra("level",0);
+            startActivity(intent);
+        //}
     }
     public void eraseInformation(View view){
 
@@ -78,6 +84,7 @@ public class MenuActivity extends Activity {
         SharedPreferences.Editor editor=settings.edit();
         editor.putInt("level",0);
         editor.commit();
+        level=0;
 
     }
 

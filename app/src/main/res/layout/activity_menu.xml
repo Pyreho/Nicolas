@@ -24,6 +24,23 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:onClick="eraseInformation"/>
+    <!--<LinearLayout
+        android:id="@+id/LevelsCompleted"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:gravity="center"
+        android:visibility="gone"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ya has completado todos los niveles!!"/>
 
+
+    </LinearLayout>
+-->
 
 </LinearLayout>

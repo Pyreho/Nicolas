@@ -6,6 +6,7 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -16,6 +17,7 @@ import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.method.Touch;
 import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
@@ -26,6 +28,7 @@ import android.view.Surface;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.android.gms.ads.AdRequest;
@@ -47,9 +50,10 @@ public class FindNicolas extends Activity {
     private float originalNicoX;
     private float originalNicoY;
     private float originalRadius;
-    private String name;
-    private String comment;
+    //private String name;
+    //private String comment;
     private Image[] images;
+    private Image image;
     private int level;
     float originalWidth;
     float originalHeight;
@@ -59,13 +63,17 @@ public class FindNicolas extends Activity {
         super.onCreate(savedInstanceState);
         Intent intent = getIntent();
         images = ((Images) intent.getSerializableExtra("images")).getImages();
-        level = intent.getIntExtra("level", 0);
-
+        SharedPreferences settings = getSharedPreferences("UserInfo", 0);
+        level=settings.getInt("level",0);
+        //level = intent.getIntExtra("level", 0);
+        image=images[level];
         setAttributes(images[level]);
         setContentView(R.layout.activity_find_nicolas);
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         PlaceholderFragment placeholderFragment = new PlaceholderFragment();
+        placeholderFragment.setLevelDescription(image.getComment());
+        placeholderFragment.setLevel(level+1);
         fragmentTransaction.add(R.id.parentNicolas, placeholderFragment, "StartLevel");
         fragmentTransaction.commit();
         final TouchImageView img =(TouchImageView)this.findViewById(R.id.img);
@@ -97,7 +105,8 @@ public class FindNicolas extends Activity {
                 if (distance(relativeCoordinates, nicoX, nicoY, radius)) {
                     Log.d("ConditionsSatisfied","idem");
                     //TODO
-                    img.setImageBitmap(nicoBitMap);
+
+                    nicolasFound(nicoBitMap,img);
                 }
 
                 return true;
@@ -140,37 +149,40 @@ public class FindNicolas extends Activity {
         originalNicoX = image.getOriginalNicoX();
         originalNicoY = image.getOriginalNicoY();
         originalRadius = image.getOriginalRadius();
-        comment = image.getComment();
-        name = image.getName();
+        //comment = image.getComment();
+        //name = image.getName();
     }
 
     private Bitmap setupRedCircleBitmap(TouchImageView img) {
-        final int imID = getResources().getIdentifier(name,"drawable",getPackageName());
+        final int imID = getResources().getIdentifier(image.getName(),"drawable",getPackageName());
         img.setImageResource(imID);
         Drawable nicoDrawable=getResources().getDrawable(imID);
         //Resource Bitmaps are immutable
         final Bitmap nicoBitMapOriginal = ((BitmapDrawable) nicoDrawable).getBitmap();
-        Log.d("nicoBitMapOriginal parameters", "Width: " + Float.toString(nicoBitMapOriginal.getWidth()) + ", Height: " + Float.toString(nicoBitMapOriginal.getHeight()));
+        //Log.d("nicoBitMapOriginal parameters", "Width: " + Float.toString(nicoBitMapOriginal.getWidth()) + ", Height: " + Float.toString(nicoBitMapOriginal.getHeight()));
         final Bitmap nicoBitMap = nicoBitMapOriginal.copy(nicoBitMapOriginal.getConfig(),true);
-        Log.d("nicoBitMap parameters", "Width: " + Float.toString(nicoBitMap.getWidth()) + ", Height: " + Float.toString(nicoBitMap.getHeight()));
-        originalWidth = img.getDrawable().getIntrinsicWidth();
-        originalHeight = img.getDrawable().getIntrinsicHeight();
-        originalRatio = originalHeight/originalWidth;
+        //Log.d("nicoBitMap parameters", "Width: " + Float.toString(nicoBitMap.getWidth()) + ", Height: " + Float.toString(nicoBitMap.getHeight()));
+        //originalWidth = img.getDrawable().getIntrinsicWidth();
+        //originalHeight = img.getDrawable().getIntrinsicHeight();
+        //originalRatio = originalHeight/originalWidth;
+        originalRatio =(float)img.getDrawable().getIntrinsicHeight()/img.getDrawable().getIntrinsicWidth();
+        originalHeight=image.getRealHeight();
+        originalWidth=originalHeight/originalRatio;
+        final float drawingFactor=nicoBitMap.getHeight()/originalHeight;
+
         Paint paint = new Paint();
-        paint.setStrokeWidth(1);
+        paint.setStrokeWidth(1*drawingFactor);
         paint.setStrokeCap(Paint.Cap.BUTT);
         paint.setStyle(Paint.Style.STROKE);
         paint.setColor(Color.RED);
         Canvas canvas = new Canvas(nicoBitMap);
-        Log.d("Original parameters", "X: " + Float.toString(originalNicoX) + ", Y: " + Float.toString(originalNicoY) + ", Radius: " + Float.toString(originalRadius));
-        Log.d("Canvas parameters", "Width: " + Float.toString(canvas.getWidth()) + ", Height: " + Float.toString(canvas.getHeight()));
-        canvas.drawCircle(originalNicoX,originalNicoY,originalRadius,paint);
+        //Log.d("Original parameters", "X: " + Float.toString(originalNicoX) + ", Y: " + Float.toString(originalNicoY) + ", Radius: " + Float.toString(originalRadius));
+        //Log.d("Canvas parameters", "Width: " + Float.toString(canvas.getWidth()) + ", Height: " + Float.toString(canvas.getHeight()));
+        canvas.drawCircle(originalNicoX*drawingFactor,originalNicoY*drawingFactor,originalRadius*drawingFactor,paint);
         return nicoBitMap;
     }
 
-    private void nicolasEncontrado(float coordX, float coordY){
 
-    }
     private boolean distance(final float[] relCoord, final float nicoX, final float nicoY, final float radius) {
         Log.d("Parameters", "X: " + Float.toString(nicoX) + ", Y: " + Float.toString(nicoY) + ", Radius: " + Float.toString(radius));
         Log.d("RelativeCoordinates", Float.toString((relCoord[0] - nicoX) * (relCoord[0] - nicoX) + (relCoord[1] - nicoY) * (relCoord[1] - nicoY)));
@@ -199,6 +211,33 @@ public class FindNicolas extends Activity {
         float finalY = (relativeCoordinates[1]*img.getCurrentZoom() + transY);
         return new float[]{finalX, finalY};
 
+    }
+    private void nicolasFound(Bitmap nicoBitMap, TouchImageView img){
+        img.setImageBitmap(nicoBitMap);
+        //TODO it would be nice if these were done sequencially
+        //try{ Thread.sleep(1000);}catch (InterruptedException e){}
+        //TODO this is wrong, I want to unscale the Matrix and unshift it
+        img.setImageMatrix(new Matrix());
+        //try{ Thread.sleep(1000);}catch (InterruptedException e){}
+        Button nextLevelButton=(Button) this.findViewById(R.id.LevelButton);
+        nextLevelButton.setVisibility(View.VISIBLE);
+    }
+    public void nextLevel(View view){
+        if(level==images.length-1){
+            View congratsView=this.findViewById(R.id.Congrats);
+            congratsView.setVisibility(View.VISIBLE);
+        }
+        else{
+            level+=1;
+            SharedPreferences settings=getSharedPreferences("UserInfo",0);
+            SharedPreferences.Editor editor=settings.edit();
+            editor.putInt("level",level);
+            editor.commit();
+            Intent intent = new Intent(this,FindNicolas.class);
+            intent.putExtra("images", new Images(images));
+            startActivity(intent);
+
+        }
     }
 
 
@@ -264,7 +303,8 @@ public class FindNicolas extends Activity {
     }
 
     public static class PlaceholderFragment extends Fragment {
-
+        private String levelDescription="Nicolás";
+        private String level= "0";
         public PlaceholderFragment() {
         }
 
@@ -272,11 +312,19 @@ public class FindNicolas extends Activity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_my, container, false);
+            TextView levelDescriptionView=(TextView)rootView.findViewById(R.id.LevelDescription);
+            levelDescriptionView.setText(levelDescription);
+            TextView levelView=(TextView)rootView.findViewById(R.id.Level);
+            levelView.setText(level);
             return rootView;
         }
         public void setLevelDescription(String levelDescription){
-
+            this.levelDescription=levelDescription;
         }
+        public void setLevel(int level) {
+            this.level ="Nivel " + Integer.toString(level);
+        }
+
     }
 
 }
