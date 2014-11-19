@@ -13,30 +13,28 @@ import java.io.Serializable;
  */
 public class JSONQuestionProvider {
 
-
     private Image[] images;
+
     public JSONQuestionProvider(Context myContext)//, String getString(R.string.questions_file))
     {
         String fileName = "Nico.json";
         try
         {
-            InputStreamReader myStream = new InputStreamReader
-                    (myContext.getAssets().open(fileName));
+            InputStreamReader myStream = new InputStreamReader(myContext.getAssets().open(fileName));
             parseImages(myStream);
             myStream.close();
-            return;
         }
-        catch (IOException localIOException)
-        {
+        catch (IOException localIOException) {
             throw new RuntimeException(localIOException);
         }
     }
+
     private void parseImages(InputStreamReader myStream)
     {
         Gson gson = new Gson();
-        this.images =
-                gson.fromJson(myStream, Image[].class);
+        this.images = gson.fromJson(myStream, Image[].class);
     }
+
     public Image[] getImages(){
         return images;
     }

@@ -6,11 +6,11 @@ import java.io.Serializable;
  * Created by gabi on 01.11.14.
  */
 public class Image implements Serializable {
-    public String name;
-    public float originalNicoX;
-    public float originalNicoY;
-    public float originalRadius;
-    public String comment;
+    private String name;
+    private float originalNicoX;
+    private float originalNicoY;
+    private float originalRadius;
+    private String comment;
 
     public String getName(){
         return name;
