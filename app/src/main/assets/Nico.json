@@ -1,1 +1,58 @@
-[{"name":"quincem2","originalNicoX":612, "originalNicoY":398, "originalRadius":25,"realHeight":683,"comment":"El Pequeño Nicolás protestando contra la corrupción"}]
+[
+    {
+        "name": "quincem2",
+        "originalNicoX": 612,
+        "originalNicoY": 398,
+        "originalRadius": 25,
+        "realHeight": 683,
+        "comment": "El Pequeño Nicolás protestando contra la corrupción"
+    },
+    {
+        "name": "conclave",
+        "originalNicoX": 218,
+        "originalNicoY": 150,
+        "originalRadius": 20,
+        "realHeight": 573,
+        "comment": "El Pequeño Nicolás tiene contactos hasta en el cielo"
+    },
+    {
+        "name": "diada",
+        "originalNicoX": 138,
+        "originalNicoY": 415,
+        "originalRadius": 20,
+        "realHeight": 600,
+        "comment": "Nunca se independizarán del pequeño Nicolás"
+    },
+    {
+        "name": "g20",
+        "originalNicoX": 1702,
+        "originalNicoY": 550,
+        "originalRadius": 25,
+        "realHeight": 1337,
+        "comment": "El Pequeño Nicolás cuenta como potencia mundial por si solo"
+    },
+    {
+        "name": "scientists",
+        "originalNicoX": 608,
+        "originalNicoY": 29,
+        "originalRadius": 25,
+        "realHeight": 507,
+        "comment": "Las mentes más brillantes del siglo XX"
+    },
+    {
+        "name": "wallstreet",
+        "originalNicoX": 278,
+        "originalNicoY": 242,
+        "originalRadius": 25,
+        "realHeight": 300,
+        "comment": "En ese momento juró que recuperaría su fortuna"
+    },
+    {
+        "name": "yalta",
+        "originalNicoX": 537,
+        "originalNicoY": 92,
+        "originalRadius": 25,
+        "realHeight": 450,
+        "comment": "Los líderes del mundo libre se reparten el planeta"
+    }
+]

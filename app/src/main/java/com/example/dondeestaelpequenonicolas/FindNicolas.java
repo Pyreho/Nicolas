@@ -236,7 +236,6 @@ public class FindNicolas extends Activity {
             Intent intent = new Intent(this,FindNicolas.class);
             intent.putExtra("images", new Images(images));
             startActivity(intent);
-
         }
     }
 
