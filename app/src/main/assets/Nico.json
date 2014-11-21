@@ -1,6 +1,6 @@
 [
     {
-        "name": "quincem2",
+        "name": "quincem3",
         "originalNicoX": 612,
         "originalNicoY": 398,
         "originalRadius": 25,
@@ -54,5 +54,53 @@
         "originalRadius": 25,
         "realHeight": 450,
         "comment": "Los líderes del mundo libre se reparten el planeta"
+    },
+    {
+        "name": "nicolasmelilla",
+        "originalNicoX": 1029,
+        "originalNicoY": 1201,
+        "originalRadius": 25,
+        "realHeight": 3944,
+        "comment": "Ningun muro podrá detenerle"
+    },
+    {
+        "name": "nicolasrealwally",
+        "originalNicoX": 1938,
+        "originalNicoY": 537,
+        "originalRadius": 25,
+        "realHeight": 1716,
+        "comment": "¿Dónde está Nicolás?"
+    },
+    {
+        "name": "nicolassanfermin",
+        "originalNicoX": 1288,
+        "originalNicoY": 145,
+        "originalRadius": 25,
+        "realHeight": 1085,
+        "comment": "¡Con valor y al toro!"
+    },
+    {
+        "name": "nicolastomatina",
+        "originalNicoX": 1530,
+        "originalNicoY": 135,
+        "originalRadius": 25,
+        "realHeight": 1379,
+        "comment": "El Pequeño Nicolás entre los rojos"
+    },
+    {
+        "name": "pequenonicolasveintitresf5",
+        "originalNicoX": 778,
+        "originalNicoY": 626,
+        "originalRadius": 25,
+        "realHeight": 1372,
+        "comment": "¡Se infiltren, coño!"
+    },
+    {
+        "name": "berlinwall",
+        "originalNicoX": 2757,
+        "originalNicoY": 3457,
+        "originalRadius": 25,
+        "realHeight": 4396,
+        "comment": "Ich bin ein Nicolaser"
     }
 ]
