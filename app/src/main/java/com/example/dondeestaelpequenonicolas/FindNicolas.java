@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
@@ -93,8 +94,7 @@ public class FindNicolas extends Activity {
                 final float nicoX = factor * originalNicoX;
                 final float nicoY = factor * originalNicoY;
                 final float radius = factor * originalRadius;
-                WindowManager windowManager = (WindowManager) getSystemService(WINDOW_SERVICE);
-                Display display = windowManager.getDefaultDisplay();
+
 
                 float[] absoluteCoordinates = new float[2];
                 float[] relativeCoordinates = new float[2];
@@ -155,12 +155,36 @@ public class FindNicolas extends Activity {
 
     private Bitmap setupRedCircleBitmap(TouchImageView img) {
         final int imID = getResources().getIdentifier(image.getName(),"drawable",getPackageName());
-        img.setImageResource(imID);
-        Drawable nicoDrawable=getResources().getDrawable(imID);
+
+        //Drawable nicoDrawable=getResources().getDrawable(imID);
         //Resource Bitmaps are immutable
-        final Bitmap nicoBitMapOriginal = ((BitmapDrawable) nicoDrawable).getBitmap();
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        //Just to get the data. It deprecates RealHeight
+        options.inJustDecodeBounds = true;
+        BitmapFactory.decodeResource(getResources(),imID,options);
+        int imageHeight = options.outHeight;
+        int imageWidth = options.outWidth;
+        //String imageType = options.outMimeType;
+        WindowManager windowManager = (WindowManager) getSystemService(WINDOW_SERVICE);
+        Display display = windowManager.getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        int screenWidth=size.x;
+        int screenHeight=size.y;
+        Log.d("screenWidth---------------", Integer.toString(screenWidth));
+        //We load up to 4*zoom in the image
+        options.inSampleSize=calculateInSampleSize(imageWidth,imageHeight, screenWidth,screenHeight);
+
+        //TODO: this is not a todo, but you can use this to debug
+        //options.inSampleSize=8;
+        options.inJustDecodeBounds=false;
+
+        final Bitmap nicoBitMapOriginal = BitmapFactory.decodeResource(getResources(),imID,options);
+        img.setImageBitmap(nicoBitMapOriginal);
+        //final Bitmap nicoBitMapOriginal = ((BitmapDrawable) nicoDrawable).getBitmap();
         //Log.d("nicoBitMapOriginal parameters", "Width: " + Float.toString(nicoBitMapOriginal.getWidth()) + ", Height: " + Float.toString(nicoBitMapOriginal.getHeight()));
         final Bitmap nicoBitMap = nicoBitMapOriginal.copy(nicoBitMapOriginal.getConfig(),true);
+
         //Log.d("nicoBitMap parameters", "Width: " + Float.toString(nicoBitMap.getWidth()) + ", Height: " + Float.toString(nicoBitMap.getHeight()));
         //originalWidth = img.getDrawable().getIntrinsicWidth();
         //originalHeight = img.getDrawable().getIntrinsicHeight();
@@ -169,6 +193,8 @@ public class FindNicolas extends Activity {
         originalHeight=image.getRealHeight();
         originalWidth=originalHeight/originalRatio;
         final float drawingFactor=nicoBitMap.getHeight()/originalHeight;
+        Log.d("Heightscompared", "OriginalHeight: "+Float.toString(originalHeight)+"imageHeight: "+Float.toString(screenHeight));
+        Log.d("Widthscompared", "OriginalWidth: "+Float.toString(originalWidth)+"imageWidth: "+Float.toString(screenWidth));
 
         Paint paint = new Paint();
         paint.setStrokeWidth(1*drawingFactor);
@@ -179,6 +205,7 @@ public class FindNicolas extends Activity {
         //Log.d("Original parameters", "X: " + Float.toString(originalNicoX) + ", Y: " + Float.toString(originalNicoY) + ", Radius: " + Float.toString(originalRadius));
         //Log.d("Canvas parameters", "Width: " + Float.toString(canvas.getWidth()) + ", Height: " + Float.toString(canvas.getHeight()));
         canvas.drawCircle(originalNicoX*drawingFactor,originalNicoY*drawingFactor,originalRadius*drawingFactor,paint);
+        //nicoBitMapOriginal.recycle();
         return nicoBitMap;
     }
 
@@ -324,6 +351,28 @@ public class FindNicolas extends Activity {
             this.level ="Nivel " + Integer.toString(level);
         }
 
+    }
+    private static int calculateInSampleSize(
+            int realWidth, int realHeight,  int reqWidth, int reqHeight) {
+        // Raw height and width of image
+        //final int height = options.outHeight;
+        //final int width = options.outWidth;
+        int inSampleSize = 1;
+
+        if (realHeight > reqHeight || realWidth > reqWidth) {
+
+            final int halfHeight = realHeight / 2;
+            final int halfWidth = realWidth / 2;
+
+            // Calculate the largest inSampleSize value that is a power of 2 and keeps both
+            // height and width larger than the requested height and width.
+            while ((halfHeight / inSampleSize) > reqHeight
+                    && (halfWidth / inSampleSize) > reqWidth) {
+                inSampleSize *= 2;
+            }
+        }
+
+        return inSampleSize;
     }
 
 }
