@@ -1,5 +1,4 @@
 [
-
     {
         "name": "yalta",
         "originalNicoX": 537,
@@ -8,39 +7,35 @@
         "realHeight": 450,
         "comment": "Los líderes del mundo libre se reparten el planeta"
     },
-     {
-            "name": "nicolasmelilla2",
-            "originalNicoX": 1029,
-            "originalNicoY": 1201,
-            "originalRadius": 50,
-            "realHeight": 3944,
-            "comment": "Ningun muro podrá detenerle"
-        },
-
     {
-            "name": "nicolascartoon3",
-            "originalNicoX": 2516,
-            "originalNicoY": 1084,
-            "originalRadius": 30,
-            "realHeight": 2078,
-            "comment": "Atrápame si puedes!!"
-        },
-
-
+        "name": "nicolasmelilla2",
+        "originalNicoX": 1029,
+        "originalNicoY": 1201,
+        "originalRadius": 70,
+        "realHeight": 3944,
+        "comment": "Ningun muro podrá detenerle"
+    },
     {
-            "name": "berlinwall2",
-            "originalNicoX": 2757,
-            "originalNicoY": 3457,
-            "originalRadius": 25,
-            "realHeight": 4396,
-            "comment": "Ich bin ein Nicolaser"
-        },
-
+        "name": "nicolascartoon3",
+        "originalNicoX": 2516,
+        "originalNicoY": 1080,
+        "originalRadius": 30,
+        "realHeight": 2078,
+        "comment": "Atrápame si puedes!!"
+    },
+    {
+        "name": "berlinwall2",
+        "originalNicoX": 2757,
+        "originalNicoY": 3457,
+        "originalRadius": 35,
+        "realHeight": 4396,
+        "comment": "Ich bin ein Nicolaser"
+    },
     {
         "name": "nicolasrealwally",
-        "originalNicoX": 1938,
-        "originalNicoY": 537,
-        "originalRadius": 25,
+        "originalNicoX": 2208,
+        "originalNicoY": 453,
+        "originalRadius": 40,
         "realHeight": 1716,
         "comment": "¿Dónde está Nicolás?"
     },
@@ -48,7 +43,7 @@
         "name": "nicolassanfermin2",
         "originalNicoX": 1288,
         "originalNicoY": 145,
-        "originalRadius": 25,
+        "originalRadius": 30,
         "realHeight": 1085,
         "comment": "¡Con valor y al toro!"
     },
@@ -56,7 +51,7 @@
         "name": "nicolastomatina",
         "originalNicoX": 1530,
         "originalNicoY": 135,
-        "originalRadius": 25,
+        "originalRadius": 40,
         "realHeight": 1379,
         "comment": "El Pequeño Nicolás entre los rojos"
     },
@@ -69,53 +64,51 @@
         "comment": "¡Se infiltren, coño!"
     },
     {
-              "name": "quincem3",
-              "originalNicoX": 612,
-              "originalNicoY": 398,
-              "originalRadius": 25,
-              "realHeight": 683,
-              "comment": "El Pequeño Nicolás protestando contra la corrupción"
-          },
-          {
-              "name": "conclave",
-              "originalNicoX": 218,
-              "originalNicoY": 150,
-              "originalRadius": 20,
-              "realHeight": 573,
-              "comment": "El Pequeño Nicolás tiene contactos hasta en el cielo"
-          },
-          {
-              "name": "diada",
-              "originalNicoX": 138,
-              "originalNicoY": 415,
-              "originalRadius": 20,
-              "realHeight": 600,
-              "comment": "Nunca se independizarán del pequeño Nicolás"
-          },
-          {
-              "name": "g20",
-              "originalNicoX": 1702,
-              "originalNicoY": 550,
-              "originalRadius": 25,
-              "realHeight": 1337,
-              "comment": "El Pequeño Nicolás cuenta como potencia mundial por si solo"
-          },
-          {
-              "name": "scientists",
-              "originalNicoX": 608,
-              "originalNicoY": 29,
-              "originalRadius": 25,
-              "realHeight": 507,
-              "comment": "Las mentes más brillantes del siglo XX"
-          },
-          {
-              "name": "wallstreet",
-              "originalNicoX": 278,
-              "originalNicoY": 242,
-              "originalRadius": 25,
-              "realHeight": 300,
-              "comment": "En ese momento juró que recuperaría su fortuna"
-          },
-
-
+        "name": "quincem3",
+        "originalNicoX": 612,
+        "originalNicoY": 398,
+        "originalRadius": 20,
+        "realHeight": 683,
+        "comment": "El Pequeño Nicolás protestando contra la corrupción"
+    },
+    {
+        "name": "conclave",
+        "originalNicoX": 218,
+        "originalNicoY": 150,
+        "originalRadius": 20,
+        "realHeight": 573,
+        "comment": "El Pequeño Nicolás tiene contactos hasta en el cielo"
+    },
+    {
+        "name": "diada",
+        "originalNicoX": 138,
+        "originalNicoY": 415,
+        "originalRadius": 18,
+        "realHeight": 600,
+        "comment": "Nunca se independizarán del pequeño Nicolás"
+    },
+    {
+        "name": "g20",
+        "originalNicoX": 1702,
+        "originalNicoY": 550,
+        "originalRadius": 25,
+        "realHeight": 1337,
+        "comment": "El Pequeño Nicolás cuenta como potencia mundial por si solo"
+    },
+    {
+        "name": "scientists",
+        "originalNicoX": 608,
+        "originalNicoY": 29,
+        "originalRadius": 20,
+        "realHeight": 507,
+        "comment": "Las mentes más brillantes del siglo XX"
+    },
+    {
+        "name": "wallstreet",
+        "originalNicoX": 278,
+        "originalNicoY": 242,
+        "originalRadius": 18,
+        "realHeight": 300,
+        "comment": "En ese momento juró que recuperaría su fortuna"
+    }
 ]
