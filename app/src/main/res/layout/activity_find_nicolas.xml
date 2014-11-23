@@ -4,7 +4,8 @@
     android:layout_height="match_parent"
     android:paddingRight="0dp"
     android:id="@+id/parentNicolas"
-    tools:context="com.example.dondeestaelpequenonicolas.FindNicolas">
+    tools:context="com.example.dondeestaelpequenonicolas.FindNicolas"
+    android:background="@color/blue_background">
 
     <com.example.dondeestaelpequenonicolas.TouchImageView
         android:id="@+id/img"
@@ -19,7 +20,14 @@
         android:text="Continuar"
         android:layout_alignParentBottom="true"
         android:visibility="gone"
-        android:onClick="nextLevel"/>
+        android:onClick="nextLevel"
+        android:background="@drawable/buttonshape"
+        android:shadowColor="#A8A8A8"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="5"
+        android:textColor="#FFFFFF"
+        android:textSize="@dimen/normal_text_size"/>
 
     <LinearLayout
         android:id="@+id/Congrats"
