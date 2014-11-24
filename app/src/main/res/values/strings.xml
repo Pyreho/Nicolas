@@ -7,5 +7,6 @@
     <string name="title_activity_find_nicolas">FindNicolas</string>
     <string name="title_activity_select_slot">SelectSlotActivity</string>
     <string name="title_activity_new_game">NewGameActivity</string>
-
+    <string name="welcome_message_first">Imágenes clasificadas que corroboran la versión del súperagente "Pequeño Nicolás".</string>
+    <string name="welcome_message_second"> Para navegar por las imágenes encuentra a Nicolás y pulsa en su cara. </string>
 </resources>

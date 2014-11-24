@@ -30,6 +30,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.gms.ads.AdRequest;
@@ -129,7 +130,7 @@ public class FindNicolas extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.find_nicolas, menu);
+        //getMenuInflater().inflate(R.menu.find_nicolas, menu);
         return true;
     }
 
@@ -244,7 +245,8 @@ public class FindNicolas extends Activity {
         //TODO it would be nice if these were done sequencially
         //try{ Thread.sleep(1000);}catch (InterruptedException e){}
         //TODO this is wrong, I want to unscale the Matrix and unshift it
-        img.setImageMatrix(new Matrix());
+        //img.setImageMatrix(ImageView.ScaleType.MATRIX);
+        img.resetZoom();
         //try{ Thread.sleep(1000);}catch (InterruptedException e){}
         Button nextLevelButton=(Button) this.findViewById(R.id.LevelButton);
         nextLevelButton.setVisibility(View.VISIBLE);

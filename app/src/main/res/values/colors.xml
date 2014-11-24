@@ -2,5 +2,9 @@
 <resources>
     <color name="blue_background">#6699ff</color>
     <color name="border_icon">#e9e9eb</color>
+    <color name="darker_inside">#2785C2</color>
+    <color name="medium_inside">#2799cf</color>
+    <color name="lighter_inside">#79cdf1</color>
+    <color name="white">#FFFFFF</color>
 
 </resources>

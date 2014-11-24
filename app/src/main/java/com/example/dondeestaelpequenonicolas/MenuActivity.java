@@ -12,12 +12,14 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
 public class MenuActivity extends Activity {
     private Images images;
-    private int level;
+    private int welcomeMessageNumber=R.integer.first_message;
+    //private int level;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,7 +27,10 @@ public class MenuActivity extends Activity {
         JSONQuestionProvider jsonQuestionProvider=new JSONQuestionProvider(this);
         images=new Images(jsonQuestionProvider.getImages());
         SharedPreferences settings = getSharedPreferences("UserInfo", 0);
-        level=settings.getInt("level",0);
+        //level=settings.getInt("level",0);
+        if(settings.getBoolean("FirstTime",true)){
+            welcomeMessage();
+        }
 
     }
 
@@ -33,7 +38,7 @@ public class MenuActivity extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu, menu);
+        //getMenuInflater().inflate(R.menu.menu, menu);
         return true;
     }
 
@@ -79,13 +84,52 @@ public class MenuActivity extends Activity {
         dialog.show();
 
             }
-    public void eraseInformation(){
+    private void eraseInformation(){
         SharedPreferences settings=getSharedPreferences("UserInfo",0);
         SharedPreferences.Editor editor=settings.edit();
         editor.putInt("level",0);
         editor.commit();
-        level=0;
+        //level=0;
+
+    }
+    public void showHelp(View view){
+        welcomeMessageNumber=R.integer.first_message;
+        showHelp();
+    }
+    public void moreHelp(View view){
+        if(welcomeMessageNumber==R.integer.first_message){
+            welcomeMessageNumber=R.integer.second_message;
+        }
+        else{
+            welcomeMessageNumber=R.integer.end_message;
+        }
+        showHelp();
+    }
+    public void showHelp(){
+        TextView welcomeMessageView=(TextView) this.findViewById(R.id.welcome_message_text);
+        View welcomeMessageLayout= this.findViewById(R.id.welcome_message_layout);
+        Log.d("message",Integer.toString(welcomeMessageNumber));
+        if(welcomeMessageNumber==R.integer.first_message){
+            welcomeMessageView.setText(R.string.welcome_message_first);
+            welcomeMessageLayout.setVisibility(View.VISIBLE);
+        }
+        else if(welcomeMessageNumber==R.integer.second_message){
+            welcomeMessageView.setText(R.string.welcome_message_second);
+        }
+        else {
+            welcomeMessageLayout.setVisibility(View.GONE);
+        }
+
+    }
+    private void welcomeMessage(){
+        SharedPreferences settings=getSharedPreferences("UserInfo",0);
+        SharedPreferences.Editor editor=settings.edit();
+        editor.putBoolean("FirstTime", false);
+        editor.commit();
+        showHelp();
 
     }
 
 }
+
+

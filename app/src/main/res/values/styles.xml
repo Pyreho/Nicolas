@@ -3,6 +3,24 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="android:Theme.Holo.Light.DarkActionBar">
         <!-- Customize your theme here. -->
+        <!--<item name="android:alertDialogStyle">@style/CustomDialogTheme</item>-->
+        <item name="android:actionBarStyle">@style/MyActionBar</item>
+        <item name="android:textColor">@color/white</item>
     </style>
-
+    <style name="MyActionBar"
+        parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">
+        <item name="android:background">@color/darker_inside</item>
+    </style>
+    <!--<style name="CustomDialogTheme" parent="@android:style/Theme.Dialog">
+    <item name="android:bottomBright">@color/lighter_inside</item>
+    <item name="android:bottomMedium">@color/medium_inside</item>
+    <item name="android:bottomDark">@color/darker_inside</item>
+    <item name="android:centerBright">@color/lighter_inside</item>
+    <item name="android:centerDark">@color/lighter_inside</item>
+    <item name="android:centerMedium">@color/lighter_inside</item>
+    <item name="android:fullBright">@color/lighter_inside</item>
+    <item name="android:fullDark">@color/lighter_inside</item>
+    <item name="android:topBright">@color/lighter_inside</item>
+    <item name="android:topDark">@color/lighter_inside</item>
+    </style>-->
 </resources>

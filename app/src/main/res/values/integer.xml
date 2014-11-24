@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="first_message">0</integer>
+    <integer name="second_message">1</integer>
+    <integer name="end_message">2</integer>
+</resources>
