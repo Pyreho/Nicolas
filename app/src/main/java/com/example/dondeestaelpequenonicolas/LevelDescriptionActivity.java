@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,6 +29,13 @@ public class LevelDescriptionActivity extends Activity {
         image=images[level];
         setContentView(R.layout.activity_level_description);
         setAttributes(image);
+        final View view=this.findViewById(R.id.start_round_button);
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {view.setVisibility(View.VISIBLE);
+
+            }
+        },600);
 
 
     }
