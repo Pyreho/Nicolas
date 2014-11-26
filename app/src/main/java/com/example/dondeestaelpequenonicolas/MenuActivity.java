@@ -60,7 +60,7 @@ public class MenuActivity extends Activity {
         levelsCompletedView.setVisibility(View.VISIBLE);
         }
         else {*/
-            Intent intent = new Intent(this, FindNicolas.class);
+            Intent intent = new Intent(this, LevelDescriptionActivity.class);
             intent.putExtra("images", this.images);
             //intent.putExtra("level",0);
             startActivity(intent);

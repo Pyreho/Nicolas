@@ -10,8 +10,10 @@ public class Image implements Serializable {
     private float originalNicoX;
     private float originalNicoY;
     private float originalRadius;
+    private float originalStroke;
     private float realHeight;
     private String comment;
+
 
     public String getName(){
         return name;
@@ -29,6 +31,6 @@ public class Image implements Serializable {
     public String getComment(){
         return comment;
     }
-
+    public float getOriginalStroke(){return originalStroke;}
 
 }

@@ -18,6 +18,7 @@ import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.method.Touch;
 import android.util.Log;
 import android.view.Display;
@@ -43,7 +44,7 @@ import java.util.Arrays;
 // http://grepcode.com/file/repo1.maven.org/maven2/org.robolectric/android-all/4.2.2_r1.2-robolectric-0/android/widget/ImageView.java
 //Source code for ImageView
 public class FindNicolas extends Activity {
-    //TODO This should be taken from the json
+
 /*    private float originalNicoX=612;
 
     private float originalNicoY=398;
@@ -71,13 +72,19 @@ public class FindNicolas extends Activity {
         image=images[level];
         setAttributes(images[level]);
         setContentView(R.layout.activity_find_nicolas);
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        PlaceholderFragment placeholderFragment = new PlaceholderFragment();
-        placeholderFragment.setLevelDescription(image.getComment());
-        placeholderFragment.setLevel(level+1);
-        fragmentTransaction.add(R.id.parentNicolas, placeholderFragment, "StartLevel");
-        fragmentTransaction.commit();
+     /*   if(savedInstanceState==null){
+            View view= this.findViewById(R.id.img);
+            view.setVisibility(View.VISIBLE);
+            }
+        else{
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            PlaceholderFragment placeholderFragment = new PlaceholderFragment();
+            placeholderFragment.setLevelDescription(image.getComment());
+            placeholderFragment.setLevel(level+1);
+            fragmentTransaction.add(R.id.parentNicolas, placeholderFragment, "StartLevel");
+            fragmentTransaction.commit();
+        }*/
         final TouchImageView img =(TouchImageView)this.findViewById(R.id.img);
 
         final Bitmap nicoBitMap = setupRedCircleBitmap(img);
@@ -105,7 +112,7 @@ public class FindNicolas extends Activity {
                 Log.d("RelativeCoordinates", Arrays.toString(relativeCoordinates));
                 if (distance(relativeCoordinates, nicoX, nicoY, radius)) {
                     Log.d("ConditionsSatisfied","idem");
-                    //TODO
+
 
                     nicolasFound(nicoBitMap,img);
                 }
@@ -145,6 +152,11 @@ public class FindNicolas extends Activity {
         }
         return super.onOptionsItemSelected(item);
     }
+    @Override
+    public void onBackPressed(){
+        Intent intent =new Intent(this,MenuActivity.class);
+        startActivity(intent);
+    }
 
     private void setAttributes(final Image image) {
         originalNicoX = image.getOriginalNicoX();
@@ -176,7 +188,7 @@ public class FindNicolas extends Activity {
         //We load up to 4*zoom in the image
         options.inSampleSize=calculateInSampleSize(imageWidth,imageHeight, screenWidth,screenHeight);
 
-        //TODO: this is not a todo, but you can use this to debug
+        //  you can use this to debug
         //options.inSampleSize=8;
         options.inJustDecodeBounds=false;
 
@@ -196,9 +208,10 @@ public class FindNicolas extends Activity {
         final float drawingFactor=nicoBitMap.getHeight()/originalHeight;
         Log.d("Heightscompared", "OriginalHeight: "+Float.toString(originalHeight)+"imageHeight: "+Float.toString(screenHeight));
         Log.d("Widthscompared", "OriginalWidth: "+Float.toString(originalWidth)+"imageWidth: "+Float.toString(screenWidth));
-
+        Log.d("drawingFactor",Float.toString(drawingFactor));
         Paint paint = new Paint();
-        paint.setStrokeWidth(1*drawingFactor);
+
+        paint.setStrokeWidth(image.getOriginalStroke()*drawingFactor);
         paint.setStrokeCap(Paint.Cap.BUTT);
         paint.setStyle(Paint.Style.STROKE);
         paint.setColor(Color.RED);
@@ -240,16 +253,25 @@ public class FindNicolas extends Activity {
         return new float[]{finalX, finalY};
 
     }
-    private void nicolasFound(Bitmap nicoBitMap, TouchImageView img){
+    private void nicolasFound(Bitmap nicoBitMap, final TouchImageView img){
         img.setImageBitmap(nicoBitMap);
-        //TODO it would be nice if these were done sequencially
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                img.resetZoom();
+            }
+            },800);
+
+
         //try{ Thread.sleep(1000);}catch (InterruptedException e){}
-        //TODO this is wrong, I want to unscale the Matrix and unshift it
-        //img.setImageMatrix(ImageView.ScaleType.MATRIX);
-        img.resetZoom();
-        //try{ Thread.sleep(1000);}catch (InterruptedException e){}
-        Button nextLevelButton=(Button) this.findViewById(R.id.LevelButton);
-        nextLevelButton.setVisibility(View.VISIBLE);
+        final Button nextLevelButton=(Button) this.findViewById(R.id.LevelButton);
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                nextLevelButton.setVisibility(View.VISIBLE);
+            }
+        },1600);
+
+
     }
     public void nextLevel(View view){
         if(level==images.length-1){
@@ -262,7 +284,7 @@ public class FindNicolas extends Activity {
             SharedPreferences.Editor editor=settings.edit();
             editor.putInt("level",level);
             editor.commit();
-            Intent intent = new Intent(this,FindNicolas.class);
+            Intent intent = new Intent(this,LevelDescriptionActivity.class);
             intent.putExtra("images", new Images(images));
             startActivity(intent);
         }
@@ -330,7 +352,7 @@ public class FindNicolas extends Activity {
 
     }
 
-    public static class PlaceholderFragment extends Fragment {
+   /* public static class PlaceholderFragment extends Fragment {
         private String levelDescription="Nicolás";
         private String level= "0";
         public PlaceholderFragment() {
@@ -350,10 +372,10 @@ public class FindNicolas extends Activity {
             this.levelDescription=levelDescription;
         }
         public void setLevel(int level) {
-            this.level ="Nivel " + Integer.toString(level);
+            this.level ="Misión " + Integer.toString(level);
         }
 
-    }
+    }*/
     private static int calculateInSampleSize(
             int realWidth, int realHeight,  int reqWidth, int reqHeight) {
         // Raw height and width of image

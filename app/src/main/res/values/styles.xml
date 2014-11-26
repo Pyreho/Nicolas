@@ -6,6 +6,7 @@
         <!--<item name="android:alertDialogStyle">@style/CustomDialogTheme</item>-->
         <item name="android:actionBarStyle">@style/MyActionBar</item>
         <item name="android:textColor">@color/white</item>
+        <item name="android:label">@string/action_bar_title</item>
     </style>
     <style name="MyActionBar"
         parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">

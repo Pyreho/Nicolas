@@ -1,25 +1,100 @@
 [
     {
+        "name": "g20",
+        "originalNicoX": 1702,
+        "originalNicoY": 550,
+        "originalRadius": 28,
+        "originalStroke": 9,
+        "realHeight": 1337,
+        "comment": "Conseguir que España entre en el G20"
+    },
+    {
+        "name": "conclave",
+        "originalNicoX": 218,
+        "originalNicoY": 150,
+        "originalRadius": 20,
+        "originalStroke": 5,
+        "realHeight": 573,
+        "comment": "Asegurar la elección de Rouco como Papa"
+    },
+    {
         "name": "yalta",
         "originalNicoX": 537,
         "originalNicoY": 92,
         "originalRadius": 25,
+        "originalStroke": 5,
         "realHeight": 450,
-        "comment": "Los líderes del mundo libre se reparten el planeta"
+        "comment": "Berlín para los aliados, Mallorca para los alemanes"
+    },
+         {
+             "name": "nicolaslivewally",
+             "originalNicoX": 2208,
+             "originalNicoY": 447,
+             "originalRadius": 45,
+             "originalStroke": 14,
+             "realHeight": 1698,
+             "comment": "Día Nacional del Espía"
+         },
+    {
+        "name": "nicolassanfermin2",
+        "originalNicoX": 1288,
+        "originalNicoY": 145,
+        "originalRadius": 33,
+        "originalStroke": 8,
+        "realHeight": 1085,
+        "comment": "Controlar a los animalistas"
     },
     {
         "name": "nicolasmelilla2",
         "originalNicoX": 1029,
         "originalNicoY": 1201,
-        "originalRadius": 70,
+        "originalRadius": 90,
+        "originalStroke": 20,
         "realHeight": 3944,
-        "comment": "Ningun muro podrá detenerle"
+        "comment": "Acabar con la inmigración ilegal"
+    },
+    {
+        "name": "nicolastomatina",
+        "originalNicoX": 1530,
+        "originalNicoY": 135,
+        "originalRadius": 55,
+        "originalStroke": 10,
+        "realHeight": 1379,
+        "comment": "Ribadeo, Rivadavia y Ribuñol"
+    },
+    {
+        "name": "pequenonicolasveintitresf5",
+        "originalNicoX": 778,
+        "originalNicoY": 626,
+        "originalRadius": 25,
+        "originalStroke": 6,
+        "realHeight": 1372,
+        "comment": "Mejorar la imagen de la Monarquía"
+    },
+    {
+        "name": "quincem3",
+        "originalNicoX": 612,
+        "originalNicoY": 398,
+        "originalRadius": 20,
+        "originalStroke": 5,
+        "realHeight": 683,
+        "comment": "Infiltrarse entre los perroflautas esos"
+    },
+    {
+        "name": "diada",
+        "originalNicoX": 138,
+        "originalNicoY": 415,
+        "originalRadius": 18,
+        "originalStroke": 5,
+        "realHeight": 600,
+        "comment": "Asegurar la Soberanía Nacional"
     },
     {
         "name": "nicolascartoon3",
         "originalNicoX": 2516,
-        "originalNicoY": 1080,
-        "originalRadius": 30,
+        "originalNicoY": 1075,
+        "originalRadius": 38,
+        "originalStroke": 12,
         "realHeight": 2078,
         "comment": "Atrápame si puedes!!"
     },
@@ -27,88 +102,18 @@
         "name": "berlinwall2",
         "originalNicoX": 2757,
         "originalNicoY": 3457,
-        "originalRadius": 35,
+        "originalRadius": 50,
+        "originalStroke": 14,
         "realHeight": 4396,
         "comment": "Ich bin ein Nicolaser"
-    },
-    {
-        "name": "nicolasrealwally",
-        "originalNicoX": 2208,
-        "originalNicoY": 453,
-        "originalRadius": 40,
-        "realHeight": 1716,
-        "comment": "¿Dónde está Nicolás?"
-    },
-    {
-        "name": "nicolassanfermin2",
-        "originalNicoX": 1288,
-        "originalNicoY": 145,
-        "originalRadius": 30,
-        "realHeight": 1085,
-        "comment": "¡Con valor y al toro!"
-    },
-    {
-        "name": "nicolastomatina",
-        "originalNicoX": 1530,
-        "originalNicoY": 135,
-        "originalRadius": 40,
-        "realHeight": 1379,
-        "comment": "El Pequeño Nicolás entre los rojos"
-    },
-    {
-        "name": "pequenonicolasveintitresf5",
-        "originalNicoX": 778,
-        "originalNicoY": 626,
-        "originalRadius": 25,
-        "realHeight": 1372,
-        "comment": "¡Se infiltren, coño!"
-    },
-    {
-        "name": "quincem3",
-        "originalNicoX": 612,
-        "originalNicoY": 398,
-        "originalRadius": 20,
-        "realHeight": 683,
-        "comment": "El Pequeño Nicolás protestando contra la corrupción"
-    },
-    {
-        "name": "conclave",
-        "originalNicoX": 218,
-        "originalNicoY": 150,
-        "originalRadius": 20,
-        "realHeight": 573,
-        "comment": "El Pequeño Nicolás tiene contactos hasta en el cielo"
-    },
-    {
-        "name": "diada",
-        "originalNicoX": 138,
-        "originalNicoY": 415,
-        "originalRadius": 18,
-        "realHeight": 600,
-        "comment": "Nunca se independizarán del pequeño Nicolás"
-    },
-    {
-        "name": "g20",
-        "originalNicoX": 1702,
-        "originalNicoY": 550,
-        "originalRadius": 25,
-        "realHeight": 1337,
-        "comment": "El Pequeño Nicolás cuenta como potencia mundial por si solo"
     },
     {
         "name": "scientists",
         "originalNicoX": 608,
         "originalNicoY": 29,
         "originalRadius": 20,
+        "originalStroke": 5,
         "realHeight": 507,
         "comment": "Las mentes más brillantes del siglo XX"
-    },
-    {
-        "name": "wallstreet",
-        "originalNicoX": 278,
-        "originalNicoY": 242,
-        "originalRadius": 18,
-        "realHeight": 300,
-        "comment": "En ese momento juró que recuperaría su fortuna"
     }
 ]
