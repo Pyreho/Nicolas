@@ -58,9 +58,12 @@ public class FindNicolas extends Activity {
     private Image[] images;
     private Image image;
     private int level;
-    float originalWidth;
-    float originalHeight;
-    float originalRatio;
+    private float originalWidth;
+    private float originalHeight;
+    private float originalRatio;
+    private Bitmap nicoBitMapOriginal;
+    private Bitmap nicoBitMap;
+    private boolean nicoFound=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,22 +75,26 @@ public class FindNicolas extends Activity {
         image=images[level];
         setAttributes(images[level]);
         setContentView(R.layout.activity_find_nicolas);
-     /*   if(savedInstanceState==null){
-            View view= this.findViewById(R.id.img);
-            view.setVisibility(View.VISIBLE);
-            }
-        else{
-            FragmentManager fragmentManager = getFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            PlaceholderFragment placeholderFragment = new PlaceholderFragment();
-            placeholderFragment.setLevelDescription(image.getComment());
-            placeholderFragment.setLevel(level+1);
-            fragmentTransaction.add(R.id.parentNicolas, placeholderFragment, "StartLevel");
-            fragmentTransaction.commit();
-        }*/
-        final TouchImageView img =(TouchImageView)this.findViewById(R.id.img);
 
-        final Bitmap nicoBitMap = setupRedCircleBitmap(img);
+        final TouchImageView img =(TouchImageView)this.findViewById(R.id.img);
+        if(nicoBitMapOriginal!=null){
+            nicoBitMapOriginal.recycle();
+            Log.d("it was not empty","Original");
+            nicoBitMapOriginal=null;
+        }
+        if(nicoBitMap!=null){
+            Log.d("it was not empty","Modified");
+            nicoBitMap.recycle();
+            nicoBitMap=null;
+        }
+        if(savedInstanceState!=null){
+            nicoFound=savedInstanceState.getBoolean("nicoFound");
+        }
+        if(nicoFound){
+            View view =findViewById(R.id.LevelButton);
+            view.setVisibility(View.VISIBLE);
+        }
+        setupRedCircleBitmap(img);
 
         img.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -108,10 +115,10 @@ public class FindNicolas extends Activity {
                 float[] relativeCoordinates = new float[2];
                 absoluteCoordinates = new float[] {motionEvent.getX(),motionEvent.getY()};
                 relativeCoordinates = eventToRelative(absoluteCoordinates,img);
-                Log.d("AbsoluteCoordinates",Arrays.toString(absoluteCoordinates));
-                Log.d("RelativeCoordinates", Arrays.toString(relativeCoordinates));
+                //Log.d("AbsoluteCoordinates",Arrays.toString(absoluteCoordinates));
+                //Log.d("RelativeCoordinates", Arrays.toString(relativeCoordinates));
                 if (distance(relativeCoordinates, nicoX, nicoY, radius)) {
-                    Log.d("ConditionsSatisfied","idem");
+                    //Log.d("ConditionsSatisfied","idem");
 
 
                     nicolasFound(nicoBitMap,img);
@@ -157,7 +164,19 @@ public class FindNicolas extends Activity {
         Intent intent =new Intent(this,MenuActivity.class);
         startActivity(intent);
     }
+    @Override
+    public void onDestroy(){
+        nicoBitMap.recycle();
+        nicoBitMapOriginal.recycle();
+        Log.d("Destroyed","destroyed");
+        super.onDestroy();
 
+    }
+    @Override
+    public void onSaveInstanceState(Bundle savedInstance){
+        savedInstance.putBoolean("nicoFound",nicoFound);
+
+    }
     private void setAttributes(final Image image) {
         originalNicoX = image.getOriginalNicoX();
         originalNicoY = image.getOriginalNicoY();
@@ -166,7 +185,7 @@ public class FindNicolas extends Activity {
         //name = image.getName();
     }
 
-    private Bitmap setupRedCircleBitmap(TouchImageView img) {
+    private void setupRedCircleBitmap(TouchImageView img) {
         final int imID = getResources().getIdentifier(image.getName(),"drawable",getPackageName());
 
         //Drawable nicoDrawable=getResources().getDrawable(imID);
@@ -184,19 +203,21 @@ public class FindNicolas extends Activity {
         display.getSize(size);
         int screenWidth=size.x;
         int screenHeight=size.y;
-        Log.d("screenWidth---------------", Integer.toString(screenWidth));
-        //We load up to 4*zoom in the image
-        options.inSampleSize=calculateInSampleSize(imageWidth,imageHeight, screenWidth,screenHeight);
+        //Log.d("screenWidth---------------", Integer.toString(screenWidth));
+        int maxMeasures=Math.max(screenHeight,screenWidth);
+        options.inSampleSize=calculateInSampleSize(imageWidth,imageHeight, maxMeasures,maxMeasures);
 
         //  you can use this to debug
         //options.inSampleSize=8;
         options.inJustDecodeBounds=false;
 
-        final Bitmap nicoBitMapOriginal = BitmapFactory.decodeResource(getResources(),imID,options);
+        nicoBitMapOriginal = BitmapFactory.decodeResource(getResources(),imID,options);
+
         img.setImageBitmap(nicoBitMapOriginal);
+
         //final Bitmap nicoBitMapOriginal = ((BitmapDrawable) nicoDrawable).getBitmap();
         //Log.d("nicoBitMapOriginal parameters", "Width: " + Float.toString(nicoBitMapOriginal.getWidth()) + ", Height: " + Float.toString(nicoBitMapOriginal.getHeight()));
-        final Bitmap nicoBitMap = nicoBitMapOriginal.copy(nicoBitMapOriginal.getConfig(),true);
+        nicoBitMap = nicoBitMapOriginal.copy(nicoBitMapOriginal.getConfig(),true);
 
         //Log.d("nicoBitMap parameters", "Width: " + Float.toString(nicoBitMap.getWidth()) + ", Height: " + Float.toString(nicoBitMap.getHeight()));
         //originalWidth = img.getDrawable().getIntrinsicWidth();
@@ -206,9 +227,9 @@ public class FindNicolas extends Activity {
         originalHeight=image.getRealHeight();
         originalWidth=originalHeight/originalRatio;
         final float drawingFactor=nicoBitMap.getHeight()/originalHeight;
-        Log.d("Heightscompared", "OriginalHeight: "+Float.toString(originalHeight)+"imageHeight: "+Float.toString(screenHeight));
-        Log.d("Widthscompared", "OriginalWidth: "+Float.toString(originalWidth)+"imageWidth: "+Float.toString(screenWidth));
-        Log.d("drawingFactor",Float.toString(drawingFactor));
+       // Log.d("Heightscompared", "OriginalHeight: "+Float.toString(originalHeight)+"imageHeight: "+Float.toString(screenHeight));
+       // Log.d("Widthscompared", "OriginalWidth: "+Float.toString(originalWidth)+"imageWidth: "+Float.toString(screenWidth));
+       // Log.d("drawingFactor",Float.toString(drawingFactor));
         Paint paint = new Paint();
 
         paint.setStrokeWidth(image.getOriginalStroke()*drawingFactor);
@@ -220,13 +241,17 @@ public class FindNicolas extends Activity {
         //Log.d("Canvas parameters", "Width: " + Float.toString(canvas.getWidth()) + ", Height: " + Float.toString(canvas.getHeight()));
         canvas.drawCircle(originalNicoX*drawingFactor,originalNicoY*drawingFactor,originalRadius*drawingFactor,paint);
         //nicoBitMapOriginal.recycle();
-        return nicoBitMap;
+        if(nicoFound){
+            img.setImageBitmap(nicoBitMap);
+            nicoBitMapOriginal.recycle();
+        }
+
     }
 
 
     private boolean distance(final float[] relCoord, final float nicoX, final float nicoY, final float radius) {
-        Log.d("Parameters", "X: " + Float.toString(nicoX) + ", Y: " + Float.toString(nicoY) + ", Radius: " + Float.toString(radius));
-        Log.d("RelativeCoordinates", Float.toString((relCoord[0] - nicoX) * (relCoord[0] - nicoX) + (relCoord[1] - nicoY) * (relCoord[1] - nicoY)));
+       // Log.d("Parameters", "X: " + Float.toString(nicoX) + ", Y: " + Float.toString(nicoY) + ", Radius: " + Float.toString(radius));
+       // Log.d("RelativeCoordinates", Float.toString((relCoord[0] - nicoX) * (relCoord[0] - nicoX) + (relCoord[1] - nicoY) * (relCoord[1] - nicoY)));
         return (relCoord[0]-nicoX) * (relCoord[0]-nicoX) + (relCoord[1]-nicoY) * (relCoord[1]-nicoY) < radius*radius;
     }
     private float[] eventToRelative(float[] absoluteCoordinates, TouchImageView img) {
@@ -255,6 +280,8 @@ public class FindNicolas extends Activity {
     }
     private void nicolasFound(Bitmap nicoBitMap, final TouchImageView img){
         img.setImageBitmap(nicoBitMap);
+        nicoFound=true;
+        nicoBitMapOriginal.recycle();
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             public void run() {
@@ -286,6 +313,9 @@ public class FindNicolas extends Activity {
             editor.commit();
             Intent intent = new Intent(this,LevelDescriptionActivity.class);
             intent.putExtra("images", new Images(images));
+            TouchImageView img =(TouchImageView)this.findViewById(R.id.img);
+            img.setImageDrawable(null);
+            nicoBitMap.recycle();
             startActivity(intent);
         }
     }

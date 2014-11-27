@@ -108,7 +108,7 @@ public class MenuActivity extends Activity {
     public void showHelp(){
         TextView welcomeMessageView=(TextView) this.findViewById(R.id.welcome_message_text);
         View welcomeMessageLayout= this.findViewById(R.id.welcome_message_layout);
-        Log.d("message",Integer.toString(welcomeMessageNumber));
+        //Log.d("message",Integer.toString(welcomeMessageNumber));
         if(welcomeMessageNumber==R.integer.first_message){
             welcomeMessageView.setText(R.string.welcome_message_first);
             welcomeMessageLayout.setVisibility(View.VISIBLE);

@@ -26,15 +26,6 @@
         "realHeight": 450,
         "comment": "Berlín para los aliados, Mallorca para los alemanes"
     },
-         {
-             "name": "nicolaslivewally",
-             "originalNicoX": 2208,
-             "originalNicoY": 447,
-             "originalRadius": 45,
-             "originalStroke": 14,
-             "realHeight": 1698,
-             "comment": "Día Nacional del Espía"
-         },
     {
         "name": "nicolassanfermin2",
         "originalNicoX": 1288,
@@ -115,5 +106,14 @@
         "originalStroke": 5,
         "realHeight": 507,
         "comment": "Las mentes más brillantes del siglo XX"
-    }
+    },
+              {
+                  "name": "nicolaslivewally",
+                  "originalNicoX": 2208,
+                  "originalNicoY": 447,
+                  "originalRadius": 45,
+                  "originalStroke": 14,
+                  "realHeight": 1698,
+                  "comment": "Día Nacional del Espía"
+              }
 ]
