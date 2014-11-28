@@ -161,11 +161,7 @@ public class FindNicolas extends Activity {
     }
     @Override
     public void onBackPressed(){
-        Intent intent =new Intent(this,MenuActivity.class);
-        TouchImageView img =(TouchImageView)this.findViewById(R.id.img);
-        img.setImageDrawable(null);
-        nicoBitMap.recycle();
-        startActivity(intent);
+        backToMenu();
     }
     @Override
     public void onDestroy(){
@@ -320,10 +316,22 @@ public class FindNicolas extends Activity {
             img.setImageDrawable(null);
             nicoBitMap.recycle();
             startActivity(intent);
+            finish();
         }
     }
 
-
+    public void backToMenu(View view){
+        backToMenu();
+    }
+    private void backToMenu(){
+        Intent intent =new Intent(this,MenuActivity.class);
+        TouchImageView img =(TouchImageView)this.findViewById(R.id.img);
+        img.setImageDrawable(null);
+        nicoBitMap.recycle();
+        nicoBitMapOriginal.recycle();
+        startActivity(intent);
+        finish();
+    }
     public static class AdFragment extends Fragment {
 
         private AdView mAdView;

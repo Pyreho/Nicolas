@@ -98,13 +98,22 @@
         "realHeight": 507,
         "comment": "Las mentes más brillantes del siglo XX"
     },
-              {
-                  "name": "nicolaslivewally",
-                  "originalNicoX": 2208,
-                  "originalNicoY": 447,
-                  "originalRadius": 45,
-                  "originalStroke": 14,
-                  "realHeight": 1698,
-                  "comment": "Día Nacional del Espía"
-              }
+      {
+          "name": "nicolaslivewally",
+          "originalNicoX": 2208,
+          "originalNicoY": 447,
+          "originalRadius": 45,
+          "originalStroke": 14,
+          "realHeight": 1698,
+          "comment": "Día Nacional del Espía"
+      },
+       {
+           "name": "berlinwall2",
+           "originalNicoX": 2757,
+           "originalNicoY": 3457,
+           "originalRadius": 50,
+           "originalStroke": 14,
+           "realHeight": 4396,
+           "comment": "Ich bin ein Nicolaser"
+       }
 ]

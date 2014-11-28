@@ -70,9 +70,11 @@ public class LevelDescriptionActivity extends Activity {
         Intent intent=new Intent(this, FindNicolas.class);
         intent.putExtra("images", new Images(images));
         startActivity(intent);
+        finish();
     }
     public void onBackPressed(){
         Intent intent =new Intent(this,MenuActivity.class);
         startActivity(intent);
+        finish();
     }
 }

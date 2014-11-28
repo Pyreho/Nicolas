@@ -53,6 +53,11 @@ public class MenuActivity extends Activity {
         }
         return super.onOptionsItemSelected(item);
     }
+    @Override
+    public void onBackPressed(){
+
+        finish();
+    }
     public void startFirstRound(View view){
         /*Log.d("level",Integer.toString(level));
         if(level==images.getImages().length){
@@ -64,6 +69,7 @@ public class MenuActivity extends Activity {
             intent.putExtra("images", this.images);
             //intent.putExtra("level",0);
             startActivity(intent);
+            finish();
         //}
     }
     public void eraseInformation(View view){
