@@ -162,6 +162,9 @@ public class FindNicolas extends Activity {
     @Override
     public void onBackPressed(){
         Intent intent =new Intent(this,MenuActivity.class);
+        TouchImageView img =(TouchImageView)this.findViewById(R.id.img);
+        img.setImageDrawable(null);
+        nicoBitMap.recycle();
         startActivity(intent);
     }
     @Override
