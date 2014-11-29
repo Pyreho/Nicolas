@@ -106,14 +106,5 @@
           "originalStroke": 14,
           "realHeight": 1698,
           "comment": "Día Nacional del Espía"
-      },
-       {
-           "name": "berlinwall2",
-           "originalNicoX": 2757,
-           "originalNicoY": 3457,
-           "originalRadius": 50,
-           "originalStroke": 14,
-           "realHeight": 4396,
-           "comment": "Ich bin ein Nicolaser"
-       }
+      }
 ]

@@ -19,7 +19,7 @@ import android.widget.Toast;
 public class MenuActivity extends Activity {
     private Images images;
     private int welcomeMessageNumber=R.integer.first_message;
-    //private int level;
+    private int level;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,7 +27,7 @@ public class MenuActivity extends Activity {
         JSONQuestionProvider jsonQuestionProvider=new JSONQuestionProvider(this);
         images=new Images(jsonQuestionProvider.getImages());
         SharedPreferences settings = getSharedPreferences("UserInfo", 0);
-        //level=settings.getInt("level",0);
+        level=settings.getInt("level",0);
         if(settings.getBoolean("FirstTime",true)){
             welcomeMessage();
         }
@@ -59,18 +59,19 @@ public class MenuActivity extends Activity {
         finish();
     }
     public void startFirstRound(View view){
-        /*Log.d("level",Integer.toString(level));
+        //Log.d("level",Integer.toString(level));
         if(level==images.getImages().length){
-        View levelsCompletedView=this.findViewById(R.id.LevelsCompleted);
+        View levelsCompletedView=this.findViewById(R.id.menu_congrats);
         levelsCompletedView.setVisibility(View.VISIBLE);
         }
-        else {*/
+        else {
+
             Intent intent = new Intent(this, LevelDescriptionActivity.class);
             intent.putExtra("images", this.images);
             //intent.putExtra("level",0);
             startActivity(intent);
             finish();
-        //}
+        }
     }
     public void eraseInformation(View view){
 
@@ -95,7 +96,7 @@ public class MenuActivity extends Activity {
         SharedPreferences.Editor editor=settings.edit();
         editor.putInt("level",0);
         editor.commit();
-        //level=0;
+        level=0;
 
     }
     public void showHelp(View view){
@@ -134,6 +135,10 @@ public class MenuActivity extends Activity {
         editor.commit();
         showHelp();
 
+    }
+    public void backToMenu(View view){
+        View congratsView=findViewById(R.id.menu_congrats);
+        congratsView.setVisibility(View.GONE);
     }
 
 }

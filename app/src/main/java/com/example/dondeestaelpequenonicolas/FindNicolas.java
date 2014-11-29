@@ -300,16 +300,19 @@ public class FindNicolas extends Activity {
 
     }
     public void nextLevel(View view){
-        if(level==images.length-1){
-            View congratsView=this.findViewById(R.id.Congrats);
-            congratsView.setVisibility(View.VISIBLE);
-        }
-        else{
+        if(level<images.length){
             level+=1;
             SharedPreferences settings=getSharedPreferences("UserInfo",0);
             SharedPreferences.Editor editor=settings.edit();
             editor.putInt("level",level);
             editor.commit();
+
+        if(level==images.length){
+            View congratsView=this.findViewById(R.id.Congrats);
+            congratsView.setVisibility(View.VISIBLE);
+        }
+        else{
+
             Intent intent = new Intent(this,LevelDescriptionActivity.class);
             intent.putExtra("images", new Images(images));
             TouchImageView img =(TouchImageView)this.findViewById(R.id.img);
@@ -317,7 +320,7 @@ public class FindNicolas extends Activity {
             nicoBitMap.recycle();
             startActivity(intent);
             finish();
-        }
+        }}
     }
 
     public void backToMenu(View view){

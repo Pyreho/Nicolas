@@ -2,7 +2,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingRight="0dp"
     android:id="@+id/parentNicolas"
     tools:context="com.example.dondeestaelpequenonicolas.FindNicolas"
     android:background="@color/blue_background"
