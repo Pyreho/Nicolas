@@ -1,24 +1,22 @@
-package com.example.dondeestaelpequenonicolas;
+package com.dondeestanicolas;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
-import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.dondeestanicolas.R;
 
 
 public class MenuActivity extends Activity {
     private Images images;
-    private int welcomeMessageNumber=R.integer.first_message;
+    private int welcomeMessageNumber= R.integer.first_message;
     private int level;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

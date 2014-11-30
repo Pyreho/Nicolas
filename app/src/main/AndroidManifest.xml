@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.dondeestaelpequenonicolas"
+    package="com.dondeestanicolas"
     android:installLocation="auto" >
 
     <!-- Include required permissions for Google Mobile Ads to run -->
@@ -20,7 +20,7 @@
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name=".MenuActivity"
+            android:name="com.dondeestanicolas.MenuActivity"
             android:label="@string/action_bar_title" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -33,14 +33,14 @@
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
             android:theme="@android:style/Theme.Translucent" />
         <activity
-            android:name=".FindNicolas"
+            android:name="com.dondeestanicolas.FindNicolas"
             android:label="@string/action_bar_title" >
 
             <!-- Include the AdActivity configChanges and theme. -->
 
         </activity>
         <activity
-            android:name=".LevelDescriptionActivity"
+            android:name="com.dondeestanicolas.LevelDescriptionActivity"
             android:label="@string/action_bar_title"  >
         </activity>
     </application>

@@ -1,4 +1,4 @@
-package com.example.dondeestaelpequenonicolas;
+package com.dondeestanicolas;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -10,7 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import com.example.dondeestaelpequenonicolas.R;
+import com.dondeestanicolas.R;
 
 public class LevelDescriptionActivity extends Activity {
     private Image[] images;

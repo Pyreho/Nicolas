@@ -1,13 +1,11 @@
-package com.example.dondeestaelpequenonicolas;
+package com.dondeestanicolas;
 
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -15,32 +13,24 @@ import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Point;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
-import android.text.method.Touch;
 import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
-import android.view.Surface;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 
-import com.example.dondeestaelpequenonicolas.R;
-import com.example.dondeestaelpequenonicolas.TouchImageView;
+import com.dondeestanicolas.R;
 
-import java.util.Arrays;
 // http://grepcode.com/file/repo1.maven.org/maven2/org.robolectric/android-all/4.2.2_r1.2-robolectric-0/android/widget/ImageView.java
 //Source code for ImageView
 public class FindNicolas extends Activity {

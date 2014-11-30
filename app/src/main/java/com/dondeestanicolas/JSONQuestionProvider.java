@@ -1,4 +1,4 @@
-package com.example.dondeestaelpequenonicolas;
+package com.dondeestanicolas;
 
 import android.content.Context;
 
@@ -6,7 +6,6 @@ import com.google.gson.Gson;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.Serializable;
 
 /**
  * Created by gabi on 01.11.14.
