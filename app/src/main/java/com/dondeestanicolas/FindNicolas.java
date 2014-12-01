@@ -194,45 +194,63 @@ public class FindNicolas extends Activity {
         int screenHeight=size.y;
         //Log.d("screenWidth---------------", Integer.toString(screenWidth));
         int maxMeasures=Math.max(screenHeight,screenWidth);
-        options.inSampleSize=calculateInSampleSize(imageWidth,imageHeight, maxMeasures,maxMeasures);
-
+        int inSampleSize=calculateInSampleSize(imageWidth,imageHeight, maxMeasures,maxMeasures);
+        options.inSampleSize=inSampleSize;
         //  you can use this to debug
         //options.inSampleSize=8;
         options.inJustDecodeBounds=false;
+        options.inPurgeable=true;
+        options.inInputShareable=true;
+        int numberOfTries=0;
+        boolean imageNotDisplayed=true;
+        while(imageNotDisplayed && numberOfTries<5) {
+            numberOfTries+=1;
+            try{
+                nicoBitMapOriginal = BitmapFactory.decodeResource(getResources(), imID, options);
 
-        nicoBitMapOriginal = BitmapFactory.decodeResource(getResources(),imID,options);
+                img.setImageBitmap(nicoBitMapOriginal);
 
-        img.setImageBitmap(nicoBitMapOriginal);
+                //final Bitmap nicoBitMapOriginal = ((BitmapDrawable) nicoDrawable).getBitmap();
+                //Log.d("nicoBitMapOriginal parameters", "Width: " + Float.toString(nicoBitMapOriginal.getWidth()) + ", Height: " + Float.toString(nicoBitMapOriginal.getHeight()));
+                nicoBitMap = nicoBitMapOriginal.copy(nicoBitMapOriginal.getConfig(), true);
 
-        //final Bitmap nicoBitMapOriginal = ((BitmapDrawable) nicoDrawable).getBitmap();
-        //Log.d("nicoBitMapOriginal parameters", "Width: " + Float.toString(nicoBitMapOriginal.getWidth()) + ", Height: " + Float.toString(nicoBitMapOriginal.getHeight()));
-        nicoBitMap = nicoBitMapOriginal.copy(nicoBitMapOriginal.getConfig(),true);
+                //Log.d("nicoBitMap parameters", "Width: " + Float.toString(nicoBitMap.getWidth()) + ", Height: " + Float.toString(nicoBitMap.getHeight()));
+                //originalWidth = img.getDrawable().getIntrinsicWidth();
+                //originalHeight = img.getDrawable().getIntrinsicHeight();
+                //originalRatio = originalHeight/originalWidth;
+                originalRatio = (float) img.getDrawable().getIntrinsicHeight() / img.getDrawable().getIntrinsicWidth();
+                originalHeight = image.getRealHeight();
+                originalWidth = originalHeight / originalRatio;
+                final float drawingFactor = nicoBitMap.getHeight() / originalHeight;
+                // Log.d("Heightscompared", "OriginalHeight: "+Float.toString(originalHeight)+"imageHeight: "+Float.toString(screenHeight));
+                // Log.d("Widthscompared", "OriginalWidth: "+Float.toString(originalWidth)+"imageWidth: "+Float.toString(screenWidth));
+                // Log.d("drawingFactor",Float.toString(drawingFactor));
+                Paint paint = new Paint();
 
-        //Log.d("nicoBitMap parameters", "Width: " + Float.toString(nicoBitMap.getWidth()) + ", Height: " + Float.toString(nicoBitMap.getHeight()));
-        //originalWidth = img.getDrawable().getIntrinsicWidth();
-        //originalHeight = img.getDrawable().getIntrinsicHeight();
-        //originalRatio = originalHeight/originalWidth;
-        originalRatio =(float)img.getDrawable().getIntrinsicHeight()/img.getDrawable().getIntrinsicWidth();
-        originalHeight=image.getRealHeight();
-        originalWidth=originalHeight/originalRatio;
-        final float drawingFactor=nicoBitMap.getHeight()/originalHeight;
-       // Log.d("Heightscompared", "OriginalHeight: "+Float.toString(originalHeight)+"imageHeight: "+Float.toString(screenHeight));
-       // Log.d("Widthscompared", "OriginalWidth: "+Float.toString(originalWidth)+"imageWidth: "+Float.toString(screenWidth));
-       // Log.d("drawingFactor",Float.toString(drawingFactor));
-        Paint paint = new Paint();
+                paint.setStrokeWidth(image.getOriginalStroke() * drawingFactor);
+                paint.setStrokeCap(Paint.Cap.BUTT);
+                paint.setStyle(Paint.Style.STROKE);
+                paint.setColor(Color.RED);
+                Canvas canvas = new Canvas(nicoBitMap);
+                //Log.d("Original parameters", "X: " + Float.toString(originalNicoX) + ", Y: " + Float.toString(originalNicoY) + ", Radius: " + Float.toString(originalRadius));
+                //Log.d("Canvas parameters", "Width: " + Float.toString(canvas.getWidth()) + ", Height: " + Float.toString(canvas.getHeight()));
+                canvas.drawCircle(originalNicoX * drawingFactor, originalNicoY * drawingFactor, originalRadius * drawingFactor, paint);
+                //nicoBitMapOriginal.recycle();
+                if (nicoFound) {
+                    img.setImageBitmap(nicoBitMap);
+                    nicoBitMapOriginal.recycle();
+                }
+                imageNotDisplayed=false;
+                }
+            catch (OutOfMemoryError E){
+                nicoBitMap.recycle();
+                nicoBitMapOriginal.recycle();
+                imageNotDisplayed=true;
+                inSampleSize*=2;
+                options.inSampleSize=inSampleSize;
+                Log.d("OutOfMemoryExceptionTryNumber",Integer.toString(numberOfTries));
 
-        paint.setStrokeWidth(image.getOriginalStroke()*drawingFactor);
-        paint.setStrokeCap(Paint.Cap.BUTT);
-        paint.setStyle(Paint.Style.STROKE);
-        paint.setColor(Color.RED);
-        Canvas canvas = new Canvas(nicoBitMap);
-        //Log.d("Original parameters", "X: " + Float.toString(originalNicoX) + ", Y: " + Float.toString(originalNicoY) + ", Radius: " + Float.toString(originalRadius));
-        //Log.d("Canvas parameters", "Width: " + Float.toString(canvas.getWidth()) + ", Height: " + Float.toString(canvas.getHeight()));
-        canvas.drawCircle(originalNicoX*drawingFactor,originalNicoY*drawingFactor,originalRadius*drawingFactor,paint);
-        //nicoBitMapOriginal.recycle();
-        if(nicoFound){
-            img.setImageBitmap(nicoBitMap);
-            nicoBitMapOriginal.recycle();
+            }
         }
 
     }
