@@ -86,6 +86,10 @@ public class FindNicolas extends Activity {
         }
         setupRedCircleBitmap(img);
 
+        //This is mainly to avoid setting the OnTouchListener if the image is not displayed and avoid using a recycled BitMap
+        Log.d("beforelistener",Boolean.toString(!nicoFound));
+        if(!nicoFound){
+        Log.d("listener",Boolean.toString(!nicoFound));
         img.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -116,7 +120,7 @@ public class FindNicolas extends Activity {
 
                 return true;
             }
-        });
+        });}
     }
 
     public void startRound(View view){
@@ -203,9 +207,10 @@ public class FindNicolas extends Activity {
         options.inInputShareable=true;
         int numberOfTries=0;
         boolean imageNotDisplayed=true;
-        while(imageNotDisplayed && numberOfTries<5) {
+        while(imageNotDisplayed && numberOfTries<6) {
             numberOfTries+=1;
             try{
+
                 nicoBitMapOriginal = BitmapFactory.decodeResource(getResources(), imID, options);
 
                 img.setImageBitmap(nicoBitMapOriginal);
@@ -236,12 +241,15 @@ public class FindNicolas extends Activity {
                 //Log.d("Canvas parameters", "Width: " + Float.toString(canvas.getWidth()) + ", Height: " + Float.toString(canvas.getHeight()));
                 canvas.drawCircle(originalNicoX * drawingFactor, originalNicoY * drawingFactor, originalRadius * drawingFactor, paint);
                 //nicoBitMapOriginal.recycle();
+
                 if (nicoFound) {
                     img.setImageBitmap(nicoBitMap);
                     nicoBitMapOriginal.recycle();
                 }
+
                 imageNotDisplayed=false;
-                }
+
+            }
             catch (OutOfMemoryError E){
                 nicoBitMap.recycle();
                 nicoBitMapOriginal.recycle();
@@ -251,6 +259,15 @@ public class FindNicolas extends Activity {
                 Log.d("OutOfMemoryExceptionTryNumber",Integer.toString(numberOfTries));
 
             }
+
+        }
+        if(imageNotDisplayed){
+            View view=this.findViewById(R.id.memory_out_of_range);
+            view.setVisibility(View.VISIBLE);
+            View button=this.findViewById(R.id.LevelButton);
+            button.setVisibility(View.VISIBLE);
+            nicoFound=true;
+            img.setImageBitmap(null);
         }
 
     }
