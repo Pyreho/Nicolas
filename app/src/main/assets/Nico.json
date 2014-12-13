@@ -106,5 +106,53 @@
           "originalStroke": 14,
           "realHeight": 1698,
           "comment": "Día Nacional del Espía"
-      }
+      },
+    {
+               "name": "pequenonicolasberlinwall",
+               "originalNicoX": 2757,
+               "originalNicoY": 3457,
+               "originalRadius": 50,
+               "originalStroke": 14,
+               "realHeight": 4396,
+               "comment": "Ich bin ein Nicolaser"
+    },
+    {
+                   "name": "nicolasgameofthrones",
+                   "originalNicoX": 166,
+                   "originalNicoY": 66,
+                   "originalRadius": 25,
+                   "originalStroke": 4,
+                   "realHeight": 504,
+                   "comment": "Traer  el rodaje de Juego de Tronos a España"
+        },
+    {
+                   "name": "nicolasstarwars2",
+                   "originalNicoX": 482,
+                   "originalNicoY": 316,
+                   "originalRadius": 10,
+                   "originalStroke": 4,
+                   "realHeight": 531,
+                   "comment": "El reverso tenebroso de las FAES"
+        },
+    {
+                   "name": "nicolasmortadelofilemonespias",
+                   "originalNicoX": 42,
+                   "originalNicoY": 1166,
+                   "originalRadius": 9,
+                   "originalStroke": 2,
+                   "realHeight": 1320,
+                   "comment": "Un día cualquiera en el CNI"
+        },
+{
+                   "name": "nicolasimageofeverything",
+                   "originalNicoX": 610,
+                   "originalNicoY": 579,
+                   "originalRadius": 9,
+                   "originalStroke": 2,
+                   "realHeight": 931,
+                   "comment": "Misión Imposible"
+        }
+
+
+
 ]

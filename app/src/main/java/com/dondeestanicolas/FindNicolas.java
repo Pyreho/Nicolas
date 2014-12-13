@@ -207,7 +207,7 @@ public class FindNicolas extends Activity {
         options.inInputShareable=true;
         int numberOfTries=0;
         boolean imageNotDisplayed=true;
-        while(imageNotDisplayed && numberOfTries<6) {
+        while(imageNotDisplayed && numberOfTries<2) {
             numberOfTries+=1;
             try{
 
