@@ -98,61 +98,85 @@
         "realHeight": 507,
         "comment": "Las mentes más brillantes del siglo XX"
     },
-      {
-          "name": "nicolaslivewally",
-          "originalNicoX": 2208,
-          "originalNicoY": 447,
-          "originalRadius": 45,
-          "originalStroke": 14,
-          "realHeight": 1698,
-          "comment": "Día Nacional del Espía"
-      },
     {
-               "name": "pequenonicolasberlinwall",
-               "originalNicoX": 2757,
-               "originalNicoY": 3457,
-               "originalRadius": 50,
-               "originalStroke": 14,
-               "realHeight": 4396,
-               "comment": "Ich bin ein Nicolaser"
+        "name": "nicolaslivewally",
+        "originalNicoX": 2208,
+        "originalNicoY": 447,
+        "originalRadius": 45,
+        "originalStroke": 14,
+        "realHeight": 1698,
+        "comment": "Día Nacional del Espía"
     },
     {
-                   "name": "nicolasgameofthrones",
-                   "originalNicoX": 166,
-                   "originalNicoY": 66,
-                   "originalRadius": 25,
-                   "originalStroke": 4,
-                   "realHeight": 504,
-                   "comment": "Traer  el rodaje de Juego de Tronos a España"
-        },
+        "name": "pequenonicolasberlinwall",
+        "originalNicoX": 2757,
+        "originalNicoY": 3457,
+        "originalRadius": 50,
+        "originalStroke": 14,
+        "realHeight": 4396,
+        "comment": "Ich bin ein Nicolaser"
+    },
     {
-                   "name": "nicolasstarwars2",
-                   "originalNicoX": 482,
-                   "originalNicoY": 316,
-                   "originalRadius": 10,
-                   "originalStroke": 4,
-                   "realHeight": 531,
-                   "comment": "El reverso tenebroso de las FAES"
-        },
+        "name": "nicolasgameofthrones",
+        "originalNicoX": 166,
+        "originalNicoY": 66,
+        "originalRadius": 25,
+        "originalStroke": 4,
+        "realHeight": 504,
+        "comment": "Traer  el rodaje de Juego de Tronos a España"
+    },
     {
-                   "name": "nicolasmortadelofilemonespias",
-                   "originalNicoX": 42,
-                   "originalNicoY": 1166,
-                   "originalRadius": 9,
-                   "originalStroke": 2,
-                   "realHeight": 1320,
-                   "comment": "Un día cualquiera en el CNI"
-        },
-{
-                   "name": "nicolasimageofeverything",
-                   "originalNicoX": 610,
-                   "originalNicoY": 579,
-                   "originalRadius": 9,
-                   "originalStroke": 2,
-                   "realHeight": 931,
-                   "comment": "Misión Imposible"
-        }
-
-
-
+        "name": "nicolasstarwars2",
+        "originalNicoX": 482,
+        "originalNicoY": 316,
+        "originalRadius": 12,
+        "originalStroke": 4,
+        "realHeight": 531,
+        "comment": "El reverso tenebroso de las FAES"
+    },
+    {
+        "name": "martinnicolas2",
+        "originalNicoX": 284,
+        "originalNicoY": 819,
+        "originalRadius": 12,
+        "originalStroke": 3,
+        "realHeight": 1125,
+        "comment": "\"Enseñar a los negritos a labrar\" (Mariló Montero)"
+    },
+    {
+        "name": "nicolasmortadelofilemonespias",
+        "originalNicoX": 42,
+        "originalNicoY": 1166,
+        "originalRadius": 11,
+        "originalStroke": 2,
+        "realHeight": 1320,
+        "comment": "Un día cualquiera en el CNI"
+    },
+    {
+        "name": "parisnicolas",
+        "originalNicoX": 481,
+        "originalNicoY": 201,
+        "originalRadius": 9,
+        "originalStroke": 2,
+        "realHeight": 352,
+        "comment": "Traerle croissants a Arturo Fernández"
+    },
+    {
+        "name": "cristobalnicolas",
+        "originalNicoX": 101,
+        "originalNicoY": 388,
+        "originalRadius": 10,
+        "originalStroke": 2,
+        "realHeight": 773,
+        "comment": "Negociar Eurovegas con los americanos"
+    },
+    {
+        "name": "nicolasimageofeverything",
+        "originalNicoX": 610,
+        "originalNicoY": 579,
+        "originalRadius": 9,
+        "originalStroke": 2,
+        "realHeight": 931,
+        "comment": "Misión Imposible"
+    }
 ]
